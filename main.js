@@ -78,5 +78,13 @@ function eliminarElementoFin(arreglo) {
   console.log(`Se ha eliminado el producto "${productoEliminado}".`);
 }
 
+// Agrega producto al inicio del arreglo
+function agregarElementoInicio(arreglo) {
+  const producto = prompt(`Ingresa el nombre del producto a agregar (Inicio):`);
+  arreglo.unshift(producto);
+
+  console.log(`Producto "${producto}" agregado al inicio del arreglo.`);
+}
+
 // Ejecutar simulador
 validadorStock();
