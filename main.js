@@ -4,6 +4,16 @@
 const precioUnitario = 5;
 const stock = 10;
 
+// Arreglo de datos
+const productos = [
+  "Teléfono inteligente",
+  "Computadora portátil",
+  "Tableta",
+  "Consola",
+  "Audífonos",
+  "Cámara digital",
+];
+
 // Función principal del simulador
 function validadorStock() {
   console.log("=== VALIDADOR DE STOCK ===");
