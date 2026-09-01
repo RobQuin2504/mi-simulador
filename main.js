@@ -56,5 +56,15 @@ function mostrarResumenCompra(unidades, precioUnidad, precioTotal) {
   console.log(`Total a pagar: $${precioTotal}`);
 }
 
+/* Operaciones con arreglos */
+
+// Agrega producto al final del arreglo
+function agregarElementoFin(arreglo) {
+  const producto = prompt(`Ingresa el nombre del producto a agregar (Fin):`);
+  arreglo.push(producto);
+
+  console.log(`Producto "${producto}" agregado al final del arreglo.`);
+}
+
 // Ejecutar simulador
 validadorStock();
