@@ -106,5 +106,19 @@ function buscarElemento(arreglo) {
   }
 }
 
+// Mostrar productos
+function mostrarArreglo(arreglo) {
+  console.log("=== Lista de productos ===");
+
+  if (arreglo.length === 0) {
+    console.log("No hay productos disponibles.");
+    return;
+  }
+
+  for (const element of arreglo) {
+    console.log(`Producto: ${element}`);
+  }
+}
+
 // Ejecutar simulador
 validadorStock();
