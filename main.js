@@ -120,7 +120,7 @@ function mostrarArreglo(arreglo) {
   }
 }
 
-function realizaOperacionesArreglo() {
+function realizaOperacionesArreglos() {
   console.log("=== OPERACIONES CON ARREGLOS ===");
 
   agregarElementoFin(productos);
@@ -132,3 +132,4 @@ function realizaOperacionesArreglo() {
 
 // Ejecutar simulador
 validadorStock();
+realizaOperacionesArreglos();
