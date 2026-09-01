@@ -102,7 +102,7 @@ function buscarElemento(arreglo) {
       `El producto "${producto}" se encuentra en la posición ${posicion}.`,
     );
   } else {
-    console.log(`El producto "${productoBuscado}" no forma parte del arreglo.`);
+    console.log(`El producto "${producto}" no forma parte del arreglo.`);
   }
 }
 
