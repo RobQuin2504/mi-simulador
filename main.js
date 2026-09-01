@@ -1,4 +1,4 @@
-/* Simulador: Validador de stock */
+/* SIMULADOR: VALIDADOR DE STOCK */
 
 // Declaración de variables
 const precioUnitario = 5;
@@ -18,7 +18,7 @@ function validadorStock() {
     );
     // Valida cantidad ingresada
     if (!validarCantidad(cantidad, stock)) {
-      console.log(`Error: La cantidad ingresada debe estar entre 1 y ${stock}`);
+      alert(`Error: La cantidad ingresada debe estar entre 1 y ${stock}`);
     }
   }
 
@@ -40,7 +40,7 @@ const calcularTotal = (unidades, precioUnidad) => {
 
 // Muestra el resumen de la compra realizada
 function mostrarResumenCompra(unidades, precioUnidad, precioTotal) {
-  console.log("=== RESUMEN DE COMPRA ===");
+  console.log("=== Resumen de compra ===");
   console.log(`Unidades compradas: ${unidades}`);
   console.log(`Precio unitario: $${precioUnidad}`);
   console.log(`Total a pagar: $${precioTotal}`);
