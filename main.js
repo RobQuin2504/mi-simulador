@@ -120,5 +120,15 @@ function mostrarArreglo(arreglo) {
   }
 }
 
+function realizaOperacionesArreglo() {
+  console.log("=== OPERACIONES CON ARREGLOS ===");
+
+  agregarElementoFin(productos);
+  agregarElementoInicio(productos);
+  buscarElemento(productos);
+  eliminarElementoFin(productos);
+  mostrarArreglo(productos);
+}
+
 // Ejecutar simulador
 validadorStock();
