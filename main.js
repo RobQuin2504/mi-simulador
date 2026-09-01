@@ -66,5 +66,17 @@ function agregarElementoFin(arreglo) {
   console.log(`Producto "${producto}" agregado al final del arreglo.`);
 }
 
+// Elimina producto del final
+function eliminarElementoFin(arreglo) {
+  if (arreglo.length === 0) {
+    alert("El arreglo está vacío.");
+    return;
+  }
+
+  const productoEliminado = arreglo.pop();
+  alert(`Se ha eliminado el producto "${productoEliminado}".`);
+  console.log(`Se ha eliminado el producto "${productoEliminado}".`);
+}
+
 // Ejecutar simulador
 validadorStock();
