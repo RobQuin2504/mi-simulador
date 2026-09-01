@@ -29,21 +29,21 @@ function validadorStock() {
 }
 
 // Valida la cantidad ingresada
-function validarCantidad(cantidad, stock) {
-  return cantidad > 0 && cantidad <= stock;
+function validarCantidad(unidades, unidadesDisponibles) {
+  return unidades > 0 && unidades <= unidadesDisponibles;
 }
 
 // Calcula el total de la compra realizada
-const calcularTotal = (cantidad, precioUnitario) => {
-  return cantidad * precioUnitario;
+const calcularTotal = (unidades, precioUnidad) => {
+  return unidades * precioUnidad;
 };
 
 // Muestra el resumen de la compra realizada
-function mostrarResumenCompra(cantidad, precioUnitario, total) {
+function mostrarResumenCompra(unidades, precioUnidad, precioTotal) {
   console.log("=== RESUMEN DE COMPRA ===");
-  console.log(`Unidades compradas: ${cantidad}`);
-  console.log(`Precio unitario: $${precioUnitario}`);
-  console.log(`Total a pagar: $${total}`);
+  console.log(`Unidades compradas: ${unidades}`);
+  console.log(`Precio unitario: $${precioUnidad}`);
+  console.log(`Total a pagar: $${precioTotal}`);
 }
 
 // Ejecutar simulador
