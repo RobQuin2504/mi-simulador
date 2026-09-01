@@ -86,5 +86,25 @@ function agregarElementoInicio(arreglo) {
   console.log(`Producto "${producto}" agregado al inicio del arreglo.`);
 }
 
+// Busca producto
+function buscarElemento(arreglo) {
+  let producto = prompt(`Ingresa el nombre del producto a buscar:`);
+
+  if (producto === "") {
+    alert("No se proporcionó ningún producto para la búsqueda.");
+    return;
+  }
+
+  const posicion = arreglo.indexOf(producto);
+
+  if (posicion !== -1) {
+    console.log(
+      `El producto "${producto}" se encuentra en la posición ${posicion}.`,
+    );
+  } else {
+    console.log(`El producto "${productoBuscado}" no forma parte del arreglo.`);
+  }
+}
+
 // Ejecutar simulador
 validadorStock();
