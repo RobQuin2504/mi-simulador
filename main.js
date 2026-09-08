@@ -104,7 +104,7 @@ function buscarProducto(listaProductos) {
 
   if (producto === "") {
     alert("No se proporcionó ningún producto para la búsqueda.");
-    return;
+    return -1;
   }
 
   let posicion = -1;
@@ -122,6 +122,31 @@ function buscarProducto(listaProductos) {
   } else {
     console.log(`El producto "${producto}" no forma parte del listado.`);
   }
+
+  return posicion;
+}
+
+// Actualiza un producto específico dentro del listado
+function actualizarProducto(listaProductos) {
+  if (listaProductos.length === 0) {
+    console.log("No hay productos disponibles.");
+    return;
+  }
+
+  let indice = buscarProducto(listaProductos);
+
+  if (indice === -1) {
+    console.log("El producto no existe.");
+    return;
+  }
+
+  const productoAnterior = listaProductos[indice];
+  const productoNuevo = "Dron";
+
+  listaProductos.splice(indice, 1, productoNuevo);
+  console.log(
+    `El producto "${productoAnterior}" ha sido reemplazado por "${productoNuevo}".`,
+  );
 }
 
 // Muestra los productos almacenados en el arreglo
@@ -138,12 +163,13 @@ function mostrarProductos(listaProductos) {
   }
 }
 
+// Ejecuta operaciones sobre el listado de productos
 function gestionarProductos(listaProductos) {
   console.log("=== OPERACIONES CON ARREGLOS ===");
 
   agregarProductoFin(listaProductos);
   agregarProductoInicio(listaProductos);
-  buscarProducto(listaProductos);
+  actualizarProducto(listaProductos);
   eliminarProductoFin(listaProductos);
   mostrarProductos(listaProductos);
 }
