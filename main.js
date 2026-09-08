@@ -107,12 +107,18 @@ function buscarProducto(listaProductos) {
     return;
   }
 
-  const posicion = listaProductos.indexOf(producto);
+  let posicion = -1;
 
-  if (posicion !== -1) {
-    console.log(
-      `El producto "${producto}" se encuentra en la posición ${posicion}.`,
-    );
+  if (listaProductos.includes(producto)) {
+    posicion = listaProductos.indexOf(producto);
+
+    if (posicion !== -1) {
+      console.log(
+        `El producto "${producto}" se encuentra en la posición ${posicion}.`,
+      );
+    } else {
+      console.log(`El producto "${producto}" no forma parte del listado.`);
+    }
   } else {
     console.log(`El producto "${producto}" no forma parte del listado.`);
   }
