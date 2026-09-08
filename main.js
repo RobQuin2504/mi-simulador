@@ -11,7 +11,6 @@ function ejecutarSimulador() {
       this.precio = precio;
       this.descripcion = descripcion;
     }
-
     verificarStock() {
       if (this.stock > 0) {
         return `El producto "${this.nombre}" está disponible. Stock: ${this.stock}`;
@@ -44,6 +43,30 @@ function ejecutarSimulador() {
   mostrarResumenCompra(cantidad, precioUnitario, total);
   // Realiza operaciones sobre el listado de productos
   gestionarProductos(productos);
+  // Instanciación
+  const producto1 = new Producto(
+    1,
+    "Laptop",
+    10,
+    15000,
+    "Laptop para trabajo y estudio",
+  );
+
+  const producto2 = new Producto(
+    2,
+    "Mouse inalámbrico",
+    0,
+    450,
+    "Mouse inalámbrico ergonómico",
+  );
+
+  const producto3 = new Producto(
+    3,
+    "Teclado mecánico",
+    15,
+    1200,
+    "Teclado mecánico RGB",
+  );
 }
 
 // Solicita una cantidad válida al usuario
