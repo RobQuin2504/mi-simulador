@@ -67,6 +67,11 @@ function ejecutarSimulador() {
     1200,
     "Teclado mecánico RGB",
   );
+
+  // Probar método
+  console.log(producto1.verificarStock());
+  console.log(producto2.verificarStock());
+  console.log(producto3.verificarStock());
 }
 
 // Solicita una cantidad válida al usuario
