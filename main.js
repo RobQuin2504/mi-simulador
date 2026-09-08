@@ -2,6 +2,25 @@
 
 // Función principal del simulador
 function ejecutarSimulador() {
+  // Declaración de clase
+  class Producto {
+    constructor(id, nombre, stock, precio, descripcion) {
+      this.id = id;
+      this.nombre = nombre;
+      this.stock = stock;
+      this.precio = precio;
+      this.descripcion = descripcion;
+    }
+
+    verificarStock() {
+      if (this.stock > 0) {
+        return `El producto "${this.nombre}" está disponible. Stock: ${this.stock}`;
+      } else {
+        return `El producto "${this.nombre}" está agotado.`;
+      }
+    }
+  }
+
   // Declaración de variables
   const precioUnitario = 5;
   const stock = 10;
