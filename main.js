@@ -1,41 +1,53 @@
 /* SIMULADOR: VALIDADOR DE STOCK */
 
-// Declaración de variables
-const precioUnitario = 5;
-const stock = 10;
-
-// Arreglo de datos
-const productos = [
-  "Teléfono inteligente",
-  "Computadora portátil",
-  "Tableta",
-  "Consola",
-  "Audífonos",
-  "Cámara digital",
-];
-
 // Función principal del simulador
-function validadorStock() {
+function ejecutarSimulador() {
+  // Declaración de variables
+  const precioUnitario = 5;
+  const stock = 10;
+
+  // Arreglo de datos
+  const productos = [
+    "Teléfono inteligente",
+    "Computadora portátil",
+    "Tableta",
+    "Consola",
+    "Audífonos",
+    "Cámara digital",
+  ];
+
   console.log("=== VALIDADOR DE STOCK ===");
 
-  let cantidad = 0;
-
-  // Bucle: se repite hasta que el usuario ingrese una cantidad válida
-  while (!validarCantidad(cantidad, stock)) {
-    // Captura entrada del usuario
-    cantidad = parseInt(
-      prompt(`Ingresa la cantidad de unidades a comprar (1 - ${stock}):`),
-    );
-    // Valida cantidad ingresada
-    if (!validarCantidad(cantidad, stock)) {
-      alert(`Error: La cantidad ingresada debe estar entre 1 y ${stock}`);
-    }
-  }
-
+  const cantidad = solicitarCantidad(stock);
   const total = calcularTotal(cantidad, precioUnitario);
 
   // Mostrar resumen de compra
   mostrarResumenCompra(cantidad, precioUnitario, total);
+  // Realiza operaciones sobre el listado de productos
+  gestionarProductos(productos);
+}
+
+// Solicita una cantidad válida al usuario
+function solicitarCantidad(unidadesDisponibles) {
+  let cantidad;
+
+  // Bucle: se repite hasta que el usuario ingrese una cantidad válida
+  do {
+    // Captura entrada del usuario
+    cantidad = parseInt(
+      prompt(
+        `Ingresa la cantidad de unidades a comprar (1 - ${unidadesDisponibles}):`,
+      ),
+    );
+    // Valida cantidad ingresada
+    if (!validarCantidad(cantidad, unidadesDisponibles)) {
+      alert(
+        `Error: La cantidad ingresada debe estar entre 1 y ${unidadesDisponibles}`,
+      );
+    }
+  } while (!validarCantidad(cantidad, unidadesDisponibles));
+
+  return cantidad;
 }
 
 // Valida la cantidad ingresada
@@ -59,35 +71,35 @@ function mostrarResumenCompra(unidades, precioUnidad, precioTotal) {
 /* Operaciones con arreglos */
 
 // Agrega producto al final del arreglo
-function agregarElementoFin(arreglo) {
+function agregarProductoFin(listaProductos) {
   const producto = prompt(`Ingresa el nombre del producto a agregar (Fin):`);
-  arreglo.push(producto);
+  listaProductos.push(producto);
 
-  console.log(`Producto "${producto}" agregado al final del arreglo.`);
+  console.log(`Producto "${producto}" agregado al final del listado.`);
 }
 
 // Elimina producto del final
-function eliminarElementoFin(arreglo) {
-  if (arreglo.length === 0) {
-    alert("El arreglo está vacío.");
+function eliminarProductoFin(listaProductos) {
+  if (listaProductos.length === 0) {
+    alert("El listado de productos está vacío.");
     return;
   }
 
-  const productoEliminado = arreglo.pop();
+  const productoEliminado = listaProductos.pop();
   alert(`Se ha eliminado el producto "${productoEliminado}".`);
   console.log(`Se ha eliminado el producto "${productoEliminado}".`);
 }
 
 // Agrega producto al inicio del arreglo
-function agregarElementoInicio(arreglo) {
+function agregarProductoInicio(listaProductos) {
   const producto = prompt(`Ingresa el nombre del producto a agregar (Inicio):`);
-  arreglo.unshift(producto);
+  listaProductos.unshift(producto);
 
-  console.log(`Producto "${producto}" agregado al inicio del arreglo.`);
+  console.log(`Producto "${producto}" agregado al inicio del listado.`);
 }
 
-// Busca producto
-function buscarElemento(arreglo) {
+// Busca un producto específico en el arreglo
+function buscarProducto(listaProductos) {
   let producto = prompt(`Ingresa el nombre del producto a buscar:`);
 
   if (producto === "") {
@@ -95,41 +107,40 @@ function buscarElemento(arreglo) {
     return;
   }
 
-  const posicion = arreglo.indexOf(producto);
+  const posicion = listaProductos.indexOf(producto);
 
   if (posicion !== -1) {
     console.log(
       `El producto "${producto}" se encuentra en la posición ${posicion}.`,
     );
   } else {
-    console.log(`El producto "${producto}" no forma parte del arreglo.`);
+    console.log(`El producto "${producto}" no forma parte del listado.`);
   }
 }
 
-// Mostrar productos
-function mostrarArreglo(arreglo) {
+// Muestra los productos almacenados en el arreglo
+function mostrarProductos(listaProductos) {
   console.log("=== Lista de productos ===");
 
-  if (arreglo.length === 0) {
+  if (listaProductos.length === 0) {
     console.log("No hay productos disponibles.");
     return;
   }
 
-  for (const element of arreglo) {
-    console.log(`Producto: ${element}`);
+  for (const producto of listaProductos) {
+    console.log(`Producto: ${producto}`);
   }
 }
 
-function realizaOperacionesArreglos() {
+function gestionarProductos(listaProductos) {
   console.log("=== OPERACIONES CON ARREGLOS ===");
 
-  agregarElementoFin(productos);
-  agregarElementoInicio(productos);
-  buscarElemento(productos);
-  eliminarElementoFin(productos);
-  mostrarArreglo(productos);
+  agregarProductoFin(listaProductos);
+  agregarProductoInicio(listaProductos);
+  buscarProducto(listaProductos);
+  eliminarProductoFin(listaProductos);
+  mostrarProductos(listaProductos);
 }
 
 // Ejecutar simulador
-validadorStock();
-realizaOperacionesArreglos();
+ejecutarSimulador();
