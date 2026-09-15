@@ -72,6 +72,13 @@ function ejecutarSimulador() {
     "Audífonos inalámbricos con cancelación de ruido",
   );
 
+  // Probar método
+  console.log(producto1.verificarStock());
+  console.log(producto2.verificarStock());
+  console.log(producto3.verificarStock());
+  console.log(producto4.verificarStock());
+  console.log(producto5.verificarStock());
+
   // Array de productos
   const listadoProductos = [
     producto1,
@@ -84,25 +91,23 @@ function ejecutarSimulador() {
   console.log("=== VALIDADOR DE STOCK ===");
 
   const producto = solicitarProducto(listadoProductos);
-  const cantidad = solicitarCantidad(stock);
-  const total = calcularTotal(cantidad, precioUnitario);
 
-  // Mostrar resumen de compra
-  mostrarResumenCompra(cantidad, precioUnitario, total);
+  if (producto !== null) {
+    const cantidad = solicitarCantidad(producto);
+    const total = calcularTotal(cantidad, precioUnitario);
+
+    // Mostrar resumen de compra
+    mostrarResumenCompra(cantidad, precioUnitario, total);
+  }
+
   // Realiza operaciones sobre el listado de productos
   gestionarProductos(productos);
-
-  // Probar método
-  console.log(producto1.verificarStock());
-  console.log(producto2.verificarStock());
-  console.log(producto3.verificarStock());
-  console.log(producto4.verificarStock());
-  console.log(producto5.verificarStock());
 }
 
 // Solicita un el nombre de un producto válido
 function solicitarProducto(listaProductos) {
   console.log("=== Productos disponibles ===");
+
   if (listaProductos.length === 0) {
     alert("No hay productos disponibles");
     return null;
@@ -121,7 +126,7 @@ function solicitarProducto(listaProductos) {
 
     // Verifica la existencia del producto
     let existeProducto = listaProductos.some(
-      (product) => product.nombre.toUpperCase() === producto.toUpperCase,
+      (prod) => prod.nombre.toUpperCase() === producto.toUpperCase(),
     );
 
     // Valida producto ingresado
@@ -130,32 +135,30 @@ function solicitarProducto(listaProductos) {
     }
   } while (!existeProducto);
 
+  // Busca un producto en particular a través de su nombre
   const productoBuscado = listaProductos.find(
-    (product) => product.nombre === producto,
+    (prod) => prod.nombre.toUpperCase() === producto.toUpperCase(),
   );
 
   return productoBuscado;
 }
 
 // Solicita una cantidad válida al usuario
-function solicitarCantidad(unidadesDisponibles) {
+function solicitarCantidad(producto) {
   let cantidad;
+  const stock = producto.stock;
 
   // Bucle: se repite hasta que el usuario ingrese una cantidad válida
   do {
-    // Captura entrada del usuario
-    cantidad = parseInt(
-      prompt(
-        `Ingresa la cantidad de unidades a comprar (1 - ${unidadesDisponibles}):`,
-      ),
-    );
-    // Valida cantidad ingresada
-    if (!validarCantidad(cantidad, unidadesDisponibles)) {
-      alert(
-        `Error: La cantidad ingresada debe estar entre 1 y ${unidadesDisponibles}`,
+    const // Captura entrada del usuario
+      cantidad = parseInt(
+        prompt(`Ingresa la cantidad de unidades a comprar (1 - ${stock}):`),
       );
+    // Valida cantidad ingresada
+    if (!validarCantidad(cantidad, stock)) {
+      alert(`Error: La cantidad ingresada debe estar entre 1 y ${stock}`);
     }
-  } while (!validarCantidad(cantidad, unidadesDisponibles));
+  } while (!validarCantidad(cantidad, stock));
 
   return cantidad;
 }
