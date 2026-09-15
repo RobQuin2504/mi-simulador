@@ -102,6 +102,9 @@ function ejecutarSimulador() {
 
   // Realiza operaciones sobre el listado de productos
   gestionarProductos(productos);
+
+  // Operaciones con funciones de orden superior
+  realizarOperaciones(listadoProductos);
 }
 
 // Solicita un el nombre de un producto válido
@@ -276,6 +279,14 @@ function mostrarProductos(listaProductos) {
   }
 }
 
+function mostrarDetalleProducto(listaProductos) {
+  const producto = solicitarProducto();
+
+  if (producto === null) {
+    return;
+  }
+}
+
 // Ejecuta operaciones sobre el listado de productos
 function gestionarProductos(listaProductos) {
   console.log("=== OPERACIONES CON ARREGLOS ===");
@@ -285,6 +296,10 @@ function gestionarProductos(listaProductos) {
   actualizarProducto(listaProductos);
   eliminarProductoFin(listaProductos);
   mostrarProductos(listaProductos);
+}
+
+function realizarOperaciones(listaProductos) {
+  mostrarDetalleProducto(listaProductos);
 }
 
 // Ejecutar simulador
