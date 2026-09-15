@@ -271,11 +271,20 @@ function actualizarProducto(listaProductos) {
   }
 
   const productoAnterior = listaProductos[indice];
-  const productoNuevo = "Dron";
 
-  listaProductos.splice(indice, 1, productoNuevo);
+  const nuevoNombre = prompt(
+    `Ingresa el nuevo nombre para "${productoAnterior.nombre}":`,
+  );
+
+  if (nuevoNombre === null || nuevoNombre === "") {
+    console.log("Actualización cancelada.");
+    return;
+  }
+
+  productoAnterior.nombre = nuevoNombre.trim();
+
   console.log(
-    `El producto "${productoAnterior}" ha sido reemplazado por "${productoNuevo}".`,
+    `El producto "${productoAnterior.nombre}" ha sido actualizado correctamente.`,
   );
 }
 
