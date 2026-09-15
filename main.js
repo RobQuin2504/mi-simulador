@@ -36,16 +36,6 @@ const listadoProductos = [
 
 // Función principal del simulador
 function ejecutarSimulador() {
-  // Arreglo de datos
-  // const productos = [
-  //   "Teléfono inteligente",
-  //   "Computadora portátil",
-  //   "Tableta",
-  //   "Consola",
-  //   "Audífonos",
-  //   "Cámara digital",
-  // ];
-
   console.log("====================================");
   console.log("      VALIDADOR DE STOCK");
   console.log("====================================");
@@ -64,7 +54,7 @@ function ejecutarSimulador() {
     const total = calcularTotal(cantidad, producto.precio);
 
     // Mostrar resumen de compra
-    mostrarResumenCompra(cantidad, precioUnitario, total);
+    mostrarResumenCompra(producto, cantidad, total);
 
     // Actualizar stock después de la compra
     producto.stock -= cantidad;
@@ -115,7 +105,7 @@ function solicitarProducto(listaProductos) {
 
     // Valida producto ingresado
     if (!productoEncontrado) {
-      alert(`Error: El producto "${producto}" no esta disponible`);
+      alert(`Error: El producto "${nombreProducto}" no esta disponible`);
     }
   } while (!productoEncontrado);
 
@@ -135,10 +125,11 @@ function solicitarCantidad(producto) {
 
   // Bucle: se repite hasta que el usuario ingrese una cantidad válida
   do {
-    const // Captura entrada del usuario
-      cantidad = parseInt(
-        prompt(`Ingresa la cantidad de unidades a comprar (1 - ${stock}):`),
-      );
+    // Captura entrada del usuario
+    cantidad = parseInt(
+      prompt(`Ingresa la cantidad de unidades a comprar (1 - ${stock}):`),
+    );
+
     // Valida cantidad ingresada
     if (!validarCantidad(cantidad, stock)) {
       alert(`Error: La cantidad ingresada debe estar entre 1 y ${stock}`);
@@ -173,7 +164,7 @@ function mostrarResumenCompra(producto, unidades, total) {
 function agregarProductoFin(listaProductos) {
   const producto = prompt(`Ingresa el nombre del producto a agregar (Fin):`);
 
-  if (producto === null || nombre === "") {
+  if (producto === null || producto === "") {
     console.log("No se agregó ningún producto.");
     return;
   }
@@ -182,7 +173,7 @@ function agregarProductoFin(listaProductos) {
 
   const nuevoProducto = new Producto(
     nuevoId,
-    nombre,
+    producto,
     0,
     0,
     "Descripción del producto",
@@ -211,7 +202,7 @@ function eliminarProductoFin(listaProductos) {
 function agregarProductoInicio(listaProductos) {
   const producto = prompt(`Ingresa el nombre del producto a agregar (Inicio):`);
 
-  if (producto === null || nombre === "") {
+  if (producto === null || producto === "") {
     console.log("No se agregó ningún producto.");
     return;
   }
@@ -220,40 +211,41 @@ function agregarProductoInicio(listaProductos) {
 
   const nuevoProducto = new Producto(
     nuevoId,
-    nombre,
+    producto,
     0,
     0,
     "Descripción del producto",
   );
 
-  listaProductos.push(nuevoProducto);
+  listaProductos.unshift(nuevoProducto);
 
   console.log(
-    `Producto "${nuevoProducto.nombre}" agregado al final del listado.`,
+    `Producto "${nuevoProducto.nombre}" agregado al inicio del listado.`,
   );
 }
 
 // Busca un producto específico en el arreglo
 function buscarProducto(listaProductos) {
-  let producto = prompt(`Ingresa el nombre del producto a buscar:`);
+  let nombreBuscado = prompt(`Ingresa el nombre del producto a buscar:`);
 
-  if (producto === null || producto === "") {
+  if (nombreBuscado === null || nombreBuscado === "") {
     alert("No se proporcionó ningún producto para la búsqueda.");
     return -1;
   }
 
-  if (!listaProductos.includes(producto)) {
-    console.log(`El producto "${producto}" no forma parte del listado.`);
-    return -1;
-  }
-
-  const posicion = listaProductos.indexOf(producto);
-
-  console.log(
-    `El producto "${producto}" se encuentra en la posición ${posicion}.`,
+  const indice = listaProductos.findIndex(
+    (producto) => producto.nombre.toLowerCase() === nombreBuscado.toLowerCase(),
   );
 
-  return posicion;
+  if (indice !== -1) {
+    console.log(
+      `El producto "${listaProductos[indice].nombre}" se encuentra en la posición ${indice}.`,
+    );
+  } else {
+    console.log(`El producto "${nombreBuscado}" no forma parte del listado.`);
+  }
+
+  return indice;
 }
 
 // Actualiza un producto específico dentro del listado
@@ -359,7 +351,9 @@ function gestionarProductos(listaProductos) {
 }
 
 // Ejecuta operaciones de orden superior sobre el listado de productos
-function realizarOperaciones(listaProductos) {
+function mostrarInformacionInventario(listaProductos) {
+  console.log("=== Operaciones de orden superior ===");
+
   mostrarDetalleProducto(listaProductos);
   mostrarProductosConStock(listaProductos);
   mostrarTotalInvertidoEnStock(listaProductos);
