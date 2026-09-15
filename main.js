@@ -19,60 +19,63 @@ class Producto {
   }
 }
 
+// Instanciación
+const listadoProductos = [
+  new Producto(1, "Laptop", 10, 15000, "Laptop para trabajo y estudio"),
+  new Producto(2, "Mouse inalámbrico", 0, 450, "Mouse inalámbrico ergonómico"),
+  new Producto(3, "Teclado mecánico", 15, 1200, "Teclado mecánico RGB"),
+  new Producto(4, "Monitor", 8, 3500, "Monitor Full HD de 24 pulgadas"),
+  new Producto(
+    5,
+    "Audífonos",
+    20,
+    800,
+    "Audífonos inalámbricos con cancelación de ruido",
+  ),
+];
+
 // Función principal del simulador
 function ejecutarSimulador() {
   // Arreglo de datos
-  const productos = [
-    "Teléfono inteligente",
-    "Computadora portátil",
-    "Tableta",
-    "Consola",
-    "Audífonos",
-    "Cámara digital",
-  ];
+  // const productos = [
+  //   "Teléfono inteligente",
+  //   "Computadora portátil",
+  //   "Tableta",
+  //   "Consola",
+  //   "Audífonos",
+  //   "Cámara digital",
+  // ];
 
-  // Instanciación
-  const listadoProductos = [
-    new Producto(1, "Laptop", 10, 15000, "Laptop para trabajo y estudio"),
+  console.log("====================================");
+  console.log("      VALIDADOR DE STOCK");
+  console.log("====================================");
 
-    new Producto(
-      2,
-      "Mouse inalámbrico",
-      0,
-      450,
-      "Mouse inalámbrico ergonómico",
-    ),
+  console.log("=== Estado del inventario ===");
 
-    new Producto(3, "Teclado mecánico", 15, 1200, "Teclado mecánico RGB"),
+  listadoProductos.forEach((producto) => {
+    console.log(producto.verificarStock());
+  });
 
-    new Producto(4, "Monitor", 8, 3500, "Monitor Full HD de 24 pulgadas"),
-
-    new Producto(
-      5,
-      "Audífonos",
-      20,
-      800,
-      "Audífonos inalámbricos con cancelación de ruido",
-    ),
-  ];
-
-  console.log("=== VALIDADOR DE STOCK ===");
-
+  console.log("=== Proceso de compra ===");
   const producto = solicitarProducto(listadoProductos);
 
   if (producto !== null) {
     const cantidad = solicitarCantidad(producto);
-    const total = calcularTotal(cantidad, precioUnitario);
+    const total = calcularTotal(cantidad, producto.precio);
 
     // Mostrar resumen de compra
     mostrarResumenCompra(cantidad, precioUnitario, total);
+
+    // Actualizar stock después de la compra
+    producto.stock -= cantidad;
+    console.log(`Stock restante de "${producto.nombre}": ${producto.stock}`);
   }
 
   // Realiza operaciones sobre el listado de productos
-  gestionarProductos(productos);
+  gestionarProductos(listadoProductos);
 
   // Operaciones con funciones de orden superior
-  realizarOperaciones(listadoProductos);
+  mostrarInformacionInventario(listadoProductos);
 }
 
 // Solicita un el nombre de un producto válido
