@@ -21,10 +21,6 @@ class Producto {
 
 // Función principal del simulador
 function ejecutarSimulador() {
-  // Declaración de variables
-  const precioUnitario = 5;
-  const stock = 10;
-
   // Arreglo de datos
   const productos = [
     "Teléfono inteligente",
@@ -35,15 +31,6 @@ function ejecutarSimulador() {
     "Cámara digital",
   ];
 
-  console.log("=== VALIDADOR DE STOCK ===");
-
-  const cantidad = solicitarCantidad(stock);
-  const total = calcularTotal(cantidad, precioUnitario);
-
-  // Mostrar resumen de compra
-  mostrarResumenCompra(cantidad, precioUnitario, total);
-  // Realiza operaciones sobre el listado de productos
-  gestionarProductos(productos);
   // Instanciación
   const producto1 = new Producto(
     1,
@@ -69,10 +56,48 @@ function ejecutarSimulador() {
     "Teclado mecánico RGB",
   );
 
+  const producto4 = new Producto(
+    4,
+    "Monitor",
+    8,
+    3500,
+    "Monitor Full HD de 24 pulgadas",
+  );
+
+  const producto5 = new Producto(
+    5,
+    "Audífonos",
+    20,
+    800,
+    "Audífonos inalámbricos con cancelación de ruido",
+  );
+
+  // Array de productos
+  const listadoProductos = [
+    producto1,
+    producto2,
+    producto3,
+    producto4,
+    producto5,
+  ];
+
+  console.log("=== VALIDADOR DE STOCK ===");
+
+  const producto = solicitarProducto(listadoProductos);
+  const cantidad = solicitarCantidad(stock);
+  const total = calcularTotal(cantidad, precioUnitario);
+
+  // Mostrar resumen de compra
+  mostrarResumenCompra(cantidad, precioUnitario, total);
+  // Realiza operaciones sobre el listado de productos
+  gestionarProductos(productos);
+
   // Probar método
   console.log(producto1.verificarStock());
   console.log(producto2.verificarStock());
   console.log(producto3.verificarStock());
+  console.log(producto4.verificarStock());
+  console.log(producto5.verificarStock());
 }
 
 // Solicita una cantidad válida al usuario
