@@ -299,6 +299,15 @@ function mostrarProductosConStock(listaProductos) {
   console.log(productosConStock);
 }
 
+// Muestra el total invertido en stock
+function mostrarTotalInvertidoEnStock(listadoProductos) {
+  const total = listadoProductos.reduce(
+    (acc, prod) => acc + prod.precio * prod.stock,
+    0,
+  );
+  console.log(`Total invertido en stock: $${total}`);
+}
+
 // Ejecuta operaciones sobre el listado de productos
 function gestionarProductos(listaProductos) {
   console.log("=== OPERACIONES CON ARREGLOS ===");
@@ -310,9 +319,11 @@ function gestionarProductos(listaProductos) {
   mostrarProductos(listaProductos);
 }
 
+// Ejecuta operaciones de orden superior sobre el listado de productos
 function realizarOperaciones(listaProductos) {
   mostrarDetalleProducto(listaProductos);
   mostrarProductosConStock(listaProductos);
+  mostrarTotalInvertidoEnStock(listaProductos);
 }
 
 // Ejecutar simulador
