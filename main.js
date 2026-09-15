@@ -279,6 +279,7 @@ function mostrarProductos(listaProductos) {
   }
 }
 
+// Muestra el detalle de un producto en particular
 function mostrarDetalleProducto(listaProductos) {
   const producto = solicitarProducto(listaProductos);
 
@@ -292,7 +293,11 @@ function mostrarDetalleProducto(listaProductos) {
   console.log(`Descripción: ${producto.descripcion}`);
 }
 
-function name(params) {}
+// Muestra solo aquellos productos que cuentan con stock disponible
+function mostrarProductosConStock(listaProductos) {
+  const productosConStock = listaProductos.filter((prod) => prod.stock > 0);
+  console.log(productosConStock);
+}
 
 // Ejecuta operaciones sobre el listado de productos
 function gestionarProductos(listaProductos) {
@@ -307,6 +312,7 @@ function gestionarProductos(listaProductos) {
 
 function realizarOperaciones(listaProductos) {
   mostrarDetalleProducto(listaProductos);
+  mostrarProductosConStock(listaProductos);
 }
 
 // Ejecutar simulador
