@@ -237,26 +237,21 @@ function agregarProductoInicio(listaProductos) {
 function buscarProducto(listaProductos) {
   let producto = prompt(`Ingresa el nombre del producto a buscar:`);
 
-  if (producto === "") {
+  if (producto === null || producto === "") {
     alert("No se proporcionó ningún producto para la búsqueda.");
     return -1;
   }
 
-  let posicion = -1;
-
-  if (listaProductos.includes(producto)) {
-    posicion = listaProductos.indexOf(producto);
-
-    if (posicion !== -1) {
-      console.log(
-        `El producto "${producto}" se encuentra en la posición ${posicion}.`,
-      );
-    } else {
-      console.log(`El producto "${producto}" no forma parte del listado.`);
-    }
-  } else {
+  if (!listaProductos.includes(producto)) {
     console.log(`El producto "${producto}" no forma parte del listado.`);
+    return -1;
   }
+
+  const posicion = listaProductos.indexOf(producto);
+
+  console.log(
+    `El producto "${producto}" se encuentra en la posición ${posicion}.`,
+  );
 
   return posicion;
 }
