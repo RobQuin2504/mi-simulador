@@ -32,60 +32,28 @@ function ejecutarSimulador() {
   ];
 
   // Instanciación
-  const producto1 = new Producto(
-    1,
-    "Laptop",
-    10,
-    15000,
-    "Laptop para trabajo y estudio",
-  );
-
-  const producto2 = new Producto(
-    2,
-    "Mouse inalámbrico",
-    0,
-    450,
-    "Mouse inalámbrico ergonómico",
-  );
-
-  const producto3 = new Producto(
-    3,
-    "Teclado mecánico",
-    15,
-    1200,
-    "Teclado mecánico RGB",
-  );
-
-  const producto4 = new Producto(
-    4,
-    "Monitor",
-    8,
-    3500,
-    "Monitor Full HD de 24 pulgadas",
-  );
-
-  const producto5 = new Producto(
-    5,
-    "Audífonos",
-    20,
-    800,
-    "Audífonos inalámbricos con cancelación de ruido",
-  );
-
-  // Probar método
-  console.log(producto1.verificarStock());
-  console.log(producto2.verificarStock());
-  console.log(producto3.verificarStock());
-  console.log(producto4.verificarStock());
-  console.log(producto5.verificarStock());
-
-  // Array de productos
   const listadoProductos = [
-    producto1,
-    producto2,
-    producto3,
-    producto4,
-    producto5,
+    new Producto(1, "Laptop", 10, 15000, "Laptop para trabajo y estudio"),
+
+    new Producto(
+      2,
+      "Mouse inalámbrico",
+      0,
+      450,
+      "Mouse inalámbrico ergonómico",
+    ),
+
+    new Producto(3, "Teclado mecánico", 15, 1200, "Teclado mecánico RGB"),
+
+    new Producto(4, "Monitor", 8, 3500, "Monitor Full HD de 24 pulgadas"),
+
+    new Producto(
+      5,
+      "Audífonos",
+      20,
+      800,
+      "Audífonos inalámbricos con cancelación de ruido",
+    ),
   ];
 
   console.log("=== VALIDADOR DE STOCK ===");
