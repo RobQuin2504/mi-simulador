@@ -159,11 +159,12 @@ const calcularTotal = (unidades, precioUnidad) => {
 };
 
 // Muestra el resumen de la compra realizada
-function mostrarResumenCompra(unidades, precioUnidad, precioTotal) {
+function mostrarResumenCompra(producto, unidades, total) {
   console.log("=== Resumen de compra ===");
+  console.log(`Producto: ${producto.nombre}`);
   console.log(`Unidades compradas: ${unidades}`);
-  console.log(`Precio unitario: $${precioUnidad}`);
-  console.log(`Total a pagar: $${precioTotal}`);
+  console.log(`Precio unitario: $${producto.precio}`);
+  console.log(`Total a pagar: $${total}`);
 }
 
 /* Operaciones con arreglos */
