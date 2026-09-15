@@ -85,36 +85,47 @@ function solicitarProducto(listaProductos) {
   if (listaProductos.length === 0) {
     alert("No hay productos disponibles");
     return null;
-  } else {
-    listaProductos.forEach((producto) => {
-      console.log(producto.nombre);
-    });
   }
 
-  let producto;
+  // Mostrar productos
+  listaProductos.forEach((producto) => {
+    console.log(
+      `${producto.nombre} | Stock: ${producto.stock} | Precio: $${producto.precio}`,
+    );
+  });
+
+  let nombreProducto;
+  let productoEncontrado;
 
   // Bucle: se repite hasta que el usuario ingrese un producto válido
   do {
     // Captura entrada del usuario
-    producto = prompt(`Ingresa el producto que desea adquirir: `);
+    nombreProducto = prompt(`Ingresa el producto que desea adquirir: `);
+
+    // Si el usuario presiona Cancelar
+    if (nombreProducto === null) {
+      return null;
+    }
 
     // Verifica la existencia del producto
-    let existeProducto = listaProductos.some(
-      (prod) => prod.nombre.toUpperCase() === producto.toUpperCase(),
+    productoEncontrado = listaProductos.find(
+      (producto) =>
+        producto.nombre.toLowerCase() === nombreProducto.toLowerCase(),
     );
 
     // Valida producto ingresado
-    if (!existeProducto) {
+    if (!productoEncontrado) {
       alert(`Error: El producto "${producto}" no esta disponible`);
     }
-  } while (!existeProducto);
+  } while (!productoEncontrado);
 
-  // Busca un producto en particular a través de su nombre
-  const productoBuscado = listaProductos.find(
-    (prod) => prod.nombre.toUpperCase() === producto.toUpperCase(),
-  );
+  // Verificar si existe stock
+  if (productoEncontrado.stock === 0) {
+    alert(`El producto "${productoEncontrado.nombre}" está agotado.`);
+    return null;
+  }
 
-  return productoBuscado;
+  return productoEncontrado;
 }
 
 // Solicita una cantidad válida al usuario
