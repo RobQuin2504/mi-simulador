@@ -297,9 +297,11 @@ function mostrarProductos(listaProductos) {
     return;
   }
 
-  for (const producto of listaProductos) {
-    console.log(`Producto: ${producto}`);
-  }
+  listaProductos.forEach((producto) => {
+    console.log(
+      `ID: ${producto.id} | Producto: ${producto.nombre} | Stock: ${producto.stock} | Precio: $${producto.precio}`,
+    );
+  });
 }
 
 // Muestra el detalle de un producto en particular
