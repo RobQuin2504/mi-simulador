@@ -172,9 +172,27 @@ function mostrarResumenCompra(producto, unidades, total) {
 // Agrega producto al final del arreglo
 function agregarProductoFin(listaProductos) {
   const producto = prompt(`Ingresa el nombre del producto a agregar (Fin):`);
-  listaProductos.push(producto);
 
-  console.log(`Producto "${producto}" agregado al final del listado.`);
+  if (producto === null || nombre === "") {
+    console.log("No se agregó ningún producto.");
+    return;
+  }
+
+  const nuevoId = listaProductos[listaProductos.length - 1].id + 1;
+
+  const nuevoProducto = new Producto(
+    nuevoId,
+    nombre,
+    0,
+    0,
+    "Descripción del producto",
+  );
+
+  listaProductos.push(nuevoProducto);
+
+  console.log(
+    `Producto "${nuevoProducto.nombre}" agregado al final del listado.`,
+  );
 }
 
 // Elimina producto del final
@@ -185,16 +203,34 @@ function eliminarProductoFin(listaProductos) {
   }
 
   const productoEliminado = listaProductos.pop();
-  alert(`Se ha eliminado el producto "${productoEliminado}".`);
-  console.log(`Se ha eliminado el producto "${productoEliminado}".`);
+  alert(`Se ha eliminado el producto "${productoEliminado.nombre}".`);
+  console.log(`Se ha eliminado el producto "${productoEliminado.nombre}".`);
 }
 
 // Agrega producto al inicio del arreglo
 function agregarProductoInicio(listaProductos) {
   const producto = prompt(`Ingresa el nombre del producto a agregar (Inicio):`);
-  listaProductos.unshift(producto);
 
-  console.log(`Producto "${producto}" agregado al inicio del listado.`);
+  if (producto === null || nombre === "") {
+    console.log("No se agregó ningún producto.");
+    return;
+  }
+
+  const nuevoId = listaProductos[listaProductos.length - 1].id + 1;
+
+  const nuevoProducto = new Producto(
+    nuevoId,
+    nombre,
+    0,
+    0,
+    "Descripción del producto",
+  );
+
+  listaProductos.push(nuevoProducto);
+
+  console.log(
+    `Producto "${nuevoProducto.nombre}" agregado al final del listado.`,
+  );
 }
 
 // Busca un producto específico en el arreglo
