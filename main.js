@@ -312,16 +312,29 @@ function mostrarDetalleProducto(listaProductos) {
     return;
   }
 
+  console.log("=== Detalle del producto ===");
   console.log(`Nombre del producto: ${producto.nombre}`);
   console.log(`Stock disponible: ${producto.stock}`);
   console.log(`Precio: $${producto.precio}`);
   console.log(`Descripción: ${producto.descripcion}`);
 }
 
-// Muestra solo aquellos productos que cuentan con stock disponible
+// Muestra únicamente los productos con stock
 function mostrarProductosConStock(listaProductos) {
-  const productosConStock = listaProductos.filter((prod) => prod.stock > 0);
-  console.log(productosConStock);
+  console.log("=== Productos con stock ===");
+
+  const productosConStock = listaProductos.filter(
+    (producto) => producto.stock > 0,
+  );
+
+  if (productosConStock.length === 0) {
+    console.log("No hay productos con stock disponible.");
+    return;
+  }
+
+  productosConStock.forEach((producto) => {
+    console.log(`${producto.nombre} | Stock: ${producto.stock}`);
+  });
 }
 
 // Muestra el total invertido en stock
