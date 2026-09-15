@@ -100,6 +100,43 @@ function ejecutarSimulador() {
   console.log(producto5.verificarStock());
 }
 
+// Solicita un el nombre de un producto válido
+function solicitarProducto(listaProductos) {
+  console.log("=== Productos disponibles ===");
+  if (listaProductos.length === 0) {
+    alert("No hay productos disponibles");
+    return null;
+  } else {
+    listaProductos.forEach((producto) => {
+      console.log(producto.nombre);
+    });
+  }
+
+  let producto;
+
+  // Bucle: se repite hasta que el usuario ingrese un producto válido
+  do {
+    // Captura entrada del usuario
+    producto = prompt(`Ingresa el producto que desea adquirir: `);
+
+    // Verifica la existencia del producto
+    let existeProducto = listaProductos.some(
+      (product) => product.nombre.toUpperCase() === producto.toUpperCase,
+    );
+
+    // Valida producto ingresado
+    if (!existeProducto) {
+      alert(`Error: El producto "${producto}" no esta disponible`);
+    }
+  } while (!existeProducto);
+
+  const productoBuscado = listaProductos.find(
+    (product) => product.nombre === producto,
+  );
+
+  return productoBuscado;
+}
+
 // Solicita una cantidad válida al usuario
 function solicitarCantidad(unidadesDisponibles) {
   let cantidad;
