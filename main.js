@@ -340,7 +340,7 @@ function mostrarProductosConStock(listaProductos) {
 // Muestra el total invertido en stock
 function mostrarTotalInvertidoEnStock(listadoProductos) {
   const total = listadoProductos.reduce(
-    (acc, prod) => acc + prod.precio * prod.stock,
+    (acc, producto) => acc + producto.precio * producto.stock,
     0,
   );
   console.log(`Total invertido en stock: $${total}`);
@@ -348,8 +348,9 @@ function mostrarTotalInvertidoEnStock(listadoProductos) {
 
 // Ejecuta operaciones sobre el listado de productos
 function gestionarProductos(listaProductos) {
-  console.log("=== OPERACIONES CON ARREGLOS ===");
+  console.log("=== Operaciones con arreglos ===");
 
+  mostrarProductos(listaProductos);
   agregarProductoFin(listaProductos);
   agregarProductoInicio(listaProductos);
   actualizarProducto(listaProductos);
