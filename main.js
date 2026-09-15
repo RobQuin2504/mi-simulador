@@ -280,12 +280,19 @@ function mostrarProductos(listaProductos) {
 }
 
 function mostrarDetalleProducto(listaProductos) {
-  const producto = solicitarProducto();
+  const producto = solicitarProducto(listaProductos);
 
   if (producto === null) {
     return;
   }
+
+  console.log(`Nombre del producto: ${producto.nombre}`);
+  console.log(`Stock disponible: ${producto.stock}`);
+  console.log(`Precio: $${producto.precio}`);
+  console.log(`Descripción: ${producto.descripcion}`);
 }
+
+function name(params) {}
 
 // Ejecuta operaciones sobre el listado de productos
 function gestionarProductos(listaProductos) {
