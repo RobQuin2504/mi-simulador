@@ -1,16 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
   <!-- JS -->
   <script defer src="./main.js"></script>
+
   <title>Pre-entrega7</title>
 </head>
 
 <body>
+  <h1 id="titulo">Venta de productos de electrónica</h1>
+
+  <div id="contenedor-formularios">
+
+    <form action="" id="form-agregacion">
+      <h2>Agregar un producto</h2>
+
+      <label for="nombre">Nombre:
+        <input type="text" name="nombre" id="nombre">
+      </label>
+
+      <label for="precio">Precio:
+        <input type="number" name="precio" id="precio">
+      </label>
+
+      <label for="stock">Stock:
+        <input type="number" name="stock" id="stock" min="1" max="20">
+      </label>
+
+      <label for="descripcion">Descripción:
+        <input type="text" name="descripcion" id="descripcion">
+      </label>
+
+      <button type="button" id="btn-agregar">Agregar +</button>
+    </form>
+
+    <div id="contenedor-busqueda">
+      <h2>Buscar un producto</h2>
+
+      <input type="text" name="buscar" id="buscar" placeholder="Nombre del producto">
+      <button type="button" id="btn-buscar">Buscar</button>
+    </div>
+  </div>
+
+  <div id="contenedor-items">
+    <h2>Listado de productos</h2>
+  </div>
+
+  <div id="contenedor-notificaciones">
+    <p id="notificacion"></p>
+  </div>
 </body>
 
 </html>
