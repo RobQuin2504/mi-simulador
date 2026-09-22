@@ -53,7 +53,6 @@ El simulador utiliza diferentes conceptos fundamentales de JavaScript:
 - `map()` → obtiene los identificadores de los productos para generar un nuevo ID.
 - `forEach()` → recorre los elementos del arreglo.
 - `filter()` → crea un nuevo arreglo con los elementos que cumplen una condición.
-- `reduce()` → permite realizar una operación acumulativa sobre los elementos del arreglo.
 
 ### Clase Producto
 
@@ -124,12 +123,6 @@ El proyecto utiliza un sistema de notificaciones para informar al usuario cuando
 Las notificaciones se muestran durante unos segundos y luego desaparecen automáticamente.
 
 ## ▶️ Ejecución
-
-Para ejecutar el simulador, abre el archivo JavaScript en un entorno que soporte:
-
-- `prompt()`
-- `alert()`
-- `console.log()`
 
 Para ejecutar el proyecto, abre el archivo **index.html** en un navegador web.
 
