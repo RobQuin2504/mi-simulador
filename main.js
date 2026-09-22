@@ -46,3 +46,13 @@ const listadoProductos = [
     "Audífonos inalámbricos con cancelación de ruido",
   ),
 ];
+
+// Muestra en pantalla las acciones realizadas
+function mostrarNotificaciones(mensaje) {
+  notificaciones.textContent = mensaje;
+
+  // Mostrar notificación por 3 segundos
+  setTimeout(() => {
+    notificaciones.textContent = "";
+  }, 3000);
+}
