@@ -200,3 +200,15 @@ function buscarProducto() {
 
   mostrarProductos(productosEncontrados);
 }
+
+// Eventos
+btnAgregar.addEventListener("click", agregarProducto);
+btnBuscar.addEventListener("click", buscarProducto);
+contenedorProductos.addEventListener("click", (event) => {
+  if (event.target.classList.contains("btn-eliminar")) {
+    eliminarProducto(event);
+  }
+});
+
+// Inicializa simulador
+mostrarProductos();
