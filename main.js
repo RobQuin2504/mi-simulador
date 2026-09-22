@@ -176,3 +176,27 @@ function agregarProducto(event) {
   // Limpiar formulario
   formularioAgregacion.reset();
 }
+
+function buscarProducto() {
+  const nombre = inputBuscar.value.toLowerCase();
+
+  // Validaciones
+  if (nombre === "") {
+    mostrarNotificaciones("El nombre del producto no es válido.");
+    mostrarProductos();
+    return;
+  }
+
+  const productosEncontrados = listadoProductos.filter(
+    (producto) => nombre === producto.nombre.toLowerCase(),
+  );
+
+  if (productosEncontrados.length === 0) {
+    mostrarNotificaciones(
+      `No se encontró ningún producto con el nombre "${inputBuscar.value}".`,
+    );
+    return;
+  }
+
+  mostrarProductos(productosEncontrados);
+}
