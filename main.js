@@ -94,3 +94,28 @@ function mostrarProductos(productos = listadoProductos) {
     contenedorProductos.appendChild(cardProducto);
   });
 }
+
+// Elimina productos del listado
+function eliminarProducto(event) {
+  const idProducto = Number(event.target.dataset.id);
+
+  // Eliminar producto del arreglo
+  const indiceProducto = listadoProductos.findIndex(
+    (producto) => producto.id === idProducto,
+  );
+
+  if (indiceProducto === -1) {
+    return;
+  }
+
+  const productoEliminado = listadoProductos[indiceProducto];
+  listadoProductos.splice(indiceProducto, 1);
+
+  mostrarProductos();
+
+  if (listadoProductos.length > 0) {
+    mostrarNotificaciones(
+      `Se ha eliminado el producto "${productoEliminado.nombre}" del listado.`,
+    );
+  }
+}
