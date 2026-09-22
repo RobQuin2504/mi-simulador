@@ -56,3 +56,41 @@ function mostrarNotificaciones(mensaje) {
     notificaciones.textContent = "";
   }, 3000);
 }
+
+// Muestra en pantalla los productos del listado
+function mostrarProductos(productos = listadoProductos) {
+  contenedorProductos.innerHTML = "";
+
+  if (productos.length === 0) {
+    contenedorProductos.innerHTML = `
+      <p class="sin-productos">
+        No hay productos para mostrar.
+      </p>
+    `;
+    return;
+  }
+
+  productos.forEach((producto) => {
+    const cardProducto = document.createElement("div");
+
+    cardProducto.className = "card-producto";
+    cardProducto.id = producto.id;
+
+    cardProducto.innerHTML = `
+      <h6>#${producto.id}</h6>
+      <h3>${producto.nombre}</h3>
+      <p>$${producto.precio}</p>
+      <p>${producto.descripcion}</p>
+      <p>${producto.verificarStock()}</p>
+
+      <button 
+        type="button"
+        class="btn-eliminar"
+        data-id="${producto.id}">
+        Eliminar
+      </button>
+    `;
+
+    contenedorProductos.appendChild(cardProducto);
+  });
+}
