@@ -119,3 +119,60 @@ function eliminarProducto(event) {
     );
   }
 }
+
+// Agrega un producto al listado
+function agregarProducto(event) {
+  event.preventDefault();
+
+  const nombre = inputNombre.value;
+  const precio = Number(inputPrecio.value);
+  const stock = Number(inputStock.value);
+  const descripcion = inputDescripcion.value;
+
+  // Validación del nombre
+  if (nombre === "") {
+    mostrarNotificaciones("El nombre del producto no es válido.");
+    return;
+  }
+
+  // Validación del precio
+  if (inputPrecio.value === "" || precio <= 0) {
+    mostrarNotificaciones("El precio ingresado no es válido.");
+    return;
+  }
+
+  // Validación del stock
+  if (inputStock.value === "" || stock < 1 || stock > 20) {
+    mostrarNotificaciones("El stock ingresado no es válido.");
+    return;
+  }
+
+  // Generar un ID nuevo
+  const nuevoId =
+    listadoProductos.length > 0
+      ? Math.max(...listadoProductos.map((producto) => producto.id)) + 1
+      : 1;
+
+  // Crea nuevo producto
+  const nuevoProducto = new Producto(
+    nuevoId,
+    nombre,
+    stock,
+    precio,
+    descripcion,
+  );
+
+  // Agregar al listado
+  listadoProductos.push(nuevoProducto);
+
+  // Actualizar interfaz
+  mostrarProductos();
+
+  // Mostrar notificación
+  mostrarNotificaciones(
+    `El producto "${nuevoProducto.nombre}" se ha agregado al listado exitosamente.`,
+  );
+
+  // Limpiar formulario
+  formularioAgregacion.reset();
+}
