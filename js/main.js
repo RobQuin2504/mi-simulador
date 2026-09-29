@@ -47,7 +47,7 @@ const productosIniciales = [
 ];
 
 // Obtener productos almacenados en localStorage
-const productosAlmacenados = localStorage.getItem("listadoProductos");
+const productosAlmacenados = localStorage.getItem("listadoProductos") ?? null;
 
 let listadoProductos;
 
@@ -147,21 +147,20 @@ function eliminarProducto(event) {
 
   mostrarProductos();
 
-  if (listadoProductos.length > 0) {
+  productoEliminado &&
     mostrarNotificaciones(
       `Se ha eliminado el producto "${productoEliminado.nombre}" del listado.`,
     );
-  }
 }
 
 // Agrega un producto al listado
 function agregarProducto(event) {
   event.preventDefault();
 
-  const nombre = inputNombre.value;
-  const precio = Number(inputPrecio.value);
-  const stock = Number(inputStock.value);
-  const descripcion = inputDescripcion.value;
+  const nombre = inputNombre?.value?.trim() || "";
+  const precio = Number(inputPrecio?.value);
+  const stock = Number(inputStock?.value);
+  const descripcion = inputDescripcion?.value?.trim() || "Sin descripción";
 
   // Validación del nombre
   if (nombre === "") {
@@ -215,7 +214,7 @@ function agregarProducto(event) {
 }
 
 function buscarProducto(textoInput) {
-  const texto = textoInput.trim().toLowerCase();
+  const texto = textoInput?.trim()?.toLowerCase() || "";
 
   // Validaciones
   if (texto === "") {
@@ -224,7 +223,7 @@ function buscarProducto(textoInput) {
   }
 
   const productosEncontrados = listadoProductos.filter((producto) =>
-    producto.nombre.toLowerCase().includes(texto),
+    producto.nombre?.toLowerCase()?.includes(texto),
   );
 
   if (productosEncontrados.length === 0) {
