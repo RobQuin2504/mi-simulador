@@ -32,7 +32,7 @@ const inputBuscar = document.querySelector("#buscar");
 let temporizador;
 
 // Instanciación
-const listadoProductos = [
+const productosIniciales = [
   new Producto(1, "Laptop", 10, 15000, "Laptop para trabajo y estudio"),
   new Producto(2, "Mouse inalámbrico", 0, 450, "Mouse inalámbrico ergonómico"),
   new Producto(3, "Teclado mecánico", 15, 1200, "Teclado mecánico RGB"),
@@ -45,6 +45,35 @@ const listadoProductos = [
     "Audífonos inalámbricos con cancelación de ruido",
   ),
 ];
+
+// Obtener productos almacenados en localStorage
+const productosAlmacenados = localStorage.getItem("listadoProductos");
+
+let listadoProductos;
+
+// Si existen productos en localStorage
+if (productosAlmacenados) {
+  // Convertir JSON a objeto JS
+  const productosJSON = JSON.parse(productosAlmacenados);
+
+  // Reconstruir las instancias de Producto
+  listadoProductos = productosJSON.map(
+    (producto) =>
+      new Producto(
+        producto.id,
+        producto.nombre,
+        producto.stock,
+        producto.precio,
+        producto.descripcion,
+      ),
+  );
+} else {
+  // Si no existe localStorage, utilizar los productos iniciales
+  listadoProductos = [...productosIniciales];
+
+  // Guardar productos iniciales en localStorage
+  localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
+}
 
 // Muestra en pantalla las acciones realizadas
 function mostrarNotificaciones(mensaje) {
@@ -113,6 +142,9 @@ function eliminarProducto(event) {
   const productoEliminado = listadoProductos[indiceProducto];
   listadoProductos.splice(indiceProducto, 1);
 
+  // Actualizar localStorage
+  localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
+
   mostrarProductos();
 
   if (listadoProductos.length > 0) {
@@ -166,6 +198,9 @@ function agregarProducto(event) {
 
   // Agregar al listado
   listadoProductos.push(nuevoProducto);
+
+  // Actualizar localStorage
+  localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
 
   // Actualizar interfaz
   mostrarProductos();
