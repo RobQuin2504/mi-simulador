@@ -70,22 +70,25 @@ function mostrarProductos(productos = listadoProductos) {
   }
 
   productos.forEach((producto) => {
+    // Desestructuración
+    const { id, nombre, precio, descripcion } = producto;
+
     const cardProducto = document.createElement("div");
 
     cardProducto.className = "card-producto";
     cardProducto.id = producto.id;
 
     cardProducto.innerHTML = `
-      <h6>#${producto.id}</h6>
-      <h3>${producto.nombre}</h3>
-      <p>$${producto.precio}</p>
-      <p>${producto.descripcion}</p>
+      <h6>#${id}</h6>
+      <h3>${nombre}</h3>
+      <p>$${precio}</p>
+      <p>${descripcion}</p>
       <p>${producto.verificarStock()}</p>
 
       <button 
         type="button"
         class="btn-eliminar"
-        data-id="${producto.id}">
+        data-id="${id}">
         Eliminar
       </button>
     `;
