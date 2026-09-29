@@ -78,8 +78,7 @@ body {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-#btn-agregar,
-#btn-buscar {
+#btn-agregar {
   border: none;
   border-radius: 7px;
   padding: 11px 18px;
@@ -99,16 +98,6 @@ body {
 
 #btn-agregar:hover {
   background-color: #1d4ed8;
-  transform: translateY(-1px);
-}
-
-#btn-buscar {
-  background-color: #0f172a;
-  color: white;
-}
-
-#btn-buscar:hover {
-  background-color: #1e293b;
   transform: translateY(-1px);
 }
 
@@ -133,10 +122,6 @@ body {
 #contenedor-busqueda #buscar {
   flex: 1;
   min-width: 200px;
-}
-
-#contenedor-busqueda #btn-buscar {
-  white-space: nowrap;
 }
 
 #contenedor-items {
@@ -282,10 +267,6 @@ body {
 
   #contenedor-busqueda #buscar {
     min-width: 0;
-    width: 100%;
-  }
-
-  #contenedor-busqueda #btn-buscar {
     width: 100%;
   }
 
