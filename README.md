@@ -6,6 +6,8 @@ El proyecto cuenta con una interfaz web que permite **agregar, buscar, mostrar y
 
 También se implementa una clase **Producto** para representar cada producto con información como identificador, nombre, stock, precio y descripción, así como un método para verificar su disponibilidad.
 
+El proyecto incorpora persistencia de datos mediante `**localStorage*`, permitiendo conservar el listado de productos aunque se recargue o cierre la página.
+
 ## 📌 Funcionalidades
 
 - Mostrar un listado inicial de productos.
@@ -16,6 +18,8 @@ También se implementa una clase **Producto** para representar cada producto con
 - Verificar la disponibilidad de stock de cada producto.
 - Mostrar mensajes de notificación al usuario.
 - Actualizar dinámicamente la interfaz mediante manipulación del DOM.
+- Guardar los productos en `**localStorage**`.
+- Recuperar los productos almacenados al cargar la aplicación.
 
 ## 🛠️ Tecnologías
 
@@ -24,6 +28,8 @@ También se implementa una clase **Producto** para representar cada producto con
 - JavaScript
 - Manipulación del DOM.
 - Eventos del navegador.
+- LocalStorage
+- JSON
 
 ## 📂 Conceptos utilizados
 
@@ -33,17 +39,21 @@ El simulador utiliza diferentes conceptos fundamentales de JavaScript:
 - Funciones.
 - Funciones fleha.
 - Condicionales.
+- Operadores avanzados.
 - Arreglos.
 - Métodos de arreglos.
 - Clases y objetos.
 - Instanciación de objetos.
 - Métodos de clase.
 - Funciones de orden superior.
+- Desestructuración.
 - Manipulación del DOM.
 - Eventos.
 - Validación de datos.
 - Template literals.
-- Uso de setTimeout().
+- Uso de `**setTimeout()**` y `**clearTimeout()**`.
+- Persistencia de datos con `**localStorage**`.
+- Serialización y deserialización mediante JSON.
 
 ### Métodos de arreglos utilizados
 
@@ -52,7 +62,7 @@ El simulador utiliza diferentes conceptos fundamentales de JavaScript:
 - `findIndex()` → busca la posición de un elemento que cumple con una condición.
 - `map()` → obtiene los identificadores de los productos para generar un nuevo ID.
 - `forEach()` → recorre los elementos del arreglo.
-- `filter()` → crea un nuevo arreglo con los elementos que cumplen una condición.
+- `filter()` → crea un nuevo arreglo con los productos cuyo nombre coincide con el texto de búsqueda.
 
 ### Clase Producto
 
@@ -74,8 +84,14 @@ El simulador utiliza diferentes métodos de arreglos para trabajar con la inform
 
 - `forEach()` para recorrer y mostrar los productos.
 - `findIndex()` para obtener la posición de un producto.
-- `filter()` para obtener únicamente los productos que cuentan con stock.
+- `filter()` para realizar búsquedas por nombre.
 - `map()` para obtener los IDs existentes y generar un nuevo identificador.
+
+### Persistencia con localStorage
+
+El proyecto incorpora `**localStorage**` para conservar la información del inventario en el navegador.
+
+De esta manera, los productos agregados o eliminados permanecen disponibles después de recargar la página.
 
 ## 🖥️ Interfaz
 
@@ -91,6 +107,10 @@ El formulario permite ingresar:
 - Descripción.
 
 Antes de agregar el producto se realizan diferentes validaciones para comprobar que los datos sean válidos.
+
+Una vez validados los datos, se genera automáticamente un nuevo ID y el producto se agrega al listado.
+
+Después de agregarlo, se actualiza `**localStorage**` y se vuelve a renderizar la interfaz.
 
 ### Buscar un producto
 
@@ -111,6 +131,12 @@ Cada producto incluye:
 - Estado del stock.
 - Botón para eliminarlo.
 
+### Eliminar un producto
+
+Cada producto cuenta con un botón Eliminar.
+
+Al eliminar un producto, se actualiza nuevamente `**localStorage**` y se vuelve a mostrar el listado actualizado.
+
 ### Notificaciones
 
 El proyecto utiliza un sistema de notificaciones para informar al usuario cuando:
@@ -130,8 +156,10 @@ El archivo HTML carga los estilos desde **style.css** y el código JavaScript de
 
 La interacción con el simulador se realiza directamente desde la interfaz gráfica mediante formularios, botones y elementos dinámicos.
 
+Los datos del inventario se almacenan localmente en el navegador mediante `**localStorage**`.
+
 ## 🎯 Objetivo
 
 El objetivo de este proyecto es practicar conceptos fundamentales de **JavaScript** mediante la creación de un pequeño sistema de gestión de productos.
 
-A través del proyecto se ponen en práctica conceptos como **arreglos, clases, objetos, funciones, métodos de orden superior, validaciones, eventos y manipulación del DOM**, aplicados a un caso práctico de inventario y control de stock.
+A través del proyecto se ponen en práctica conceptos como **arreglos, clases, objetos, funciones, métodos de orden superior, validaciones, eventos y manipulación del DOM y almacenamiento local**, aplicados a un caso práctico de inventario y control de stock.
