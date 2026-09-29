@@ -6,7 +6,7 @@ El proyecto cuenta con una interfaz web que permite **agregar, buscar, mostrar y
 
 También se implementa una clase **Producto** para representar cada producto con información como identificador, nombre, stock, precio y descripción, así como un método para verificar su disponibilidad.
 
-El proyecto incorpora persistencia de datos mediante `**localStorage*`, permitiendo conservar el listado de productos aunque se recargue o cierre la página.
+El proyecto incorpora persistencia de datos mediante **`localStorage`**, permitiendo conservar el listado de productos aunque se recargue o cierre la página.
 
 ## 📌 Funcionalidades
 
@@ -18,7 +18,7 @@ El proyecto incorpora persistencia de datos mediante `**localStorage*`, permitie
 - Verificar la disponibilidad de stock de cada producto.
 - Mostrar mensajes de notificación al usuario.
 - Actualizar dinámicamente la interfaz mediante manipulación del DOM.
-- Guardar los productos en `**localStorage**`.
+- Guardar los productos en **`localStorage`**.
 - Recuperar los productos almacenados al cargar la aplicación.
 
 ## 🛠️ Tecnologías
@@ -51,8 +51,8 @@ El simulador utiliza diferentes conceptos fundamentales de JavaScript:
 - Eventos.
 - Validación de datos.
 - Template literals.
-- Uso de `**setTimeout()**` y `**clearTimeout()**`.
-- Persistencia de datos con `**localStorage**`.
+- Uso de **`setTimeout()`** y **`clearTimeout()`**.
+- Persistencia de datos con **`localStorage`**.
 - Serialización y deserialización mediante JSON.
 
 ### Métodos de arreglos utilizados
@@ -89,7 +89,7 @@ El simulador utiliza diferentes métodos de arreglos para trabajar con la inform
 
 ### Persistencia con localStorage
 
-El proyecto incorpora `**localStorage**` para conservar la información del inventario en el navegador.
+El proyecto incorpora **`localStorage`** para conservar la información del inventario en el navegador.
 
 De esta manera, los productos agregados o eliminados permanecen disponibles después de recargar la página.
 
@@ -110,7 +110,7 @@ Antes de agregar el producto se realizan diferentes validaciones para comprobar 
 
 Una vez validados los datos, se genera automáticamente un nuevo ID y el producto se agrega al listado.
 
-Después de agregarlo, se actualiza `**localStorage**` y se vuelve a renderizar la interfaz.
+Después de agregarlo, se actualiza **`localStorage`** y se vuelve a renderizar la interfaz.
 
 ### Buscar un producto
 
@@ -135,7 +135,7 @@ Cada producto incluye:
 
 Cada producto cuenta con un botón Eliminar.
 
-Al eliminar un producto, se actualiza nuevamente `**localStorage**` y se vuelve a mostrar el listado actualizado.
+Al eliminar un producto, se actualiza nuevamente **`localStorage`** y se vuelve a mostrar el listado actualizado.
 
 ### Notificaciones
 
@@ -156,7 +156,7 @@ El archivo HTML carga los estilos desde **style.css** y el código JavaScript de
 
 La interacción con el simulador se realiza directamente desde la interfaz gráfica mediante formularios, botones y elementos dinámicos.
 
-Los datos del inventario se almacenan localmente en el navegador mediante `**localStorage**`.
+Los datos del inventario se almacenan localmente en el navegador mediante **`localStorage`**.
 
 ## 🎯 Objetivo
 
