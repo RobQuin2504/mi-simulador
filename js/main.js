@@ -23,7 +23,6 @@ class Producto {
 const formularioAgregacion = document.getElementById("form-agregacion");
 const contenedorProductos = document.getElementById("contenedor-items");
 const btnAgregar = document.getElementById("btn-agregar");
-const btnBuscar = document.getElementById("btn-buscar");
 const notificaciones = document.getElementById("notificacion");
 
 const inputNombre = document.querySelector("#nombre");
@@ -31,6 +30,8 @@ const inputPrecio = document.querySelector("#precio");
 const inputStock = document.querySelector("#stock");
 const inputDescripcion = document.querySelector("#descripcion");
 const inputBuscar = document.querySelector("#buscar");
+
+let temporizador;
 
 // Instanciación
 const listadoProductos = [
@@ -177,24 +178,21 @@ function agregarProducto(event) {
   formularioAgregacion.reset();
 }
 
-function buscarProducto() {
-  const nombre = inputBuscar.value.toLowerCase();
+function buscarProducto(textoInput) {
+  const texto = textoInput.trim().toLowerCase();
 
   // Validaciones
-  if (nombre === "") {
-    mostrarNotificaciones("El nombre del producto no es válido.");
+  if (texto === "") {
     mostrarProductos();
     return;
   }
 
-  const productosEncontrados = listadoProductos.filter(
-    (producto) => nombre === producto.nombre.toLowerCase(),
+  const productosEncontrados = listadoProductos.filter((producto) =>
+    producto.nombre.toLowerCase().includes(texto),
   );
 
   if (productosEncontrados.length === 0) {
-    mostrarNotificaciones(
-      `No se encontró ningún producto con el nombre "${inputBuscar.value}".`,
-    );
+    mostrarProductos([]);
     return;
   }
 
@@ -203,7 +201,17 @@ function buscarProducto() {
 
 // Eventos
 btnAgregar.addEventListener("click", agregarProducto);
-btnBuscar.addEventListener("click", buscarProducto);
+
+inputBuscar.addEventListener("keyup", (event) => {
+  // Limpia el temporizador anterior
+  clearTimeout(temporizador);
+
+  // Espera 300 milisegundos antes de realizar la búsqueda
+  temporizador = setTimeout(() => {
+    buscarProducto(event.target.value);
+  }, 300);
+});
+
 contenedorProductos.addEventListener("click", (event) => {
   if (event.target.classList.contains("btn-eliminar")) {
     eliminarProducto(event);
