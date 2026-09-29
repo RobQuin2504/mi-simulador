@@ -11,11 +11,9 @@ class Producto {
   }
 
   verificarStock() {
-    if (this.stock > 0) {
-      return `El producto "${this.nombre}" está disponible. Stock: ${this.stock}`;
-    } else {
-      return `El producto "${this.nombre}" está agotado.`;
-    }
+    return this.stock > 0
+      ? `El producto "${this.nombre}" está disponible. Stock: ${this.stock}`
+      : `El producto "${this.nombre}" está agotado.`;
   }
 }
 
