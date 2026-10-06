@@ -21,6 +21,7 @@ class Producto {
 const formularioAgregacion = document.getElementById("form-agregacion");
 const contenedorProductos = document.getElementById("contenedor-items");
 const btnAgregar = document.getElementById("btn-agregar");
+const btnVaciarListado = document.getElementById("btn-vaciar-listado");
 const notificaciones = document.getElementById("notificacion");
 
 const inputNombre = document.querySelector("#nombre");
@@ -213,6 +214,13 @@ function agregarProducto(event) {
   formularioAgregacion.reset();
 }
 
+// Vacía por completo el listado
+function borrarListado() {
+  listadoProductos = [];
+  localStorage.removeItem("listadoProductos");
+  mostrarProductos();
+}
+
 function buscarProducto(textoInput) {
   const texto = textoInput?.trim()?.toLowerCase() || "";
 
@@ -236,6 +244,8 @@ function buscarProducto(textoInput) {
 
 // Eventos
 btnAgregar.addEventListener("click", agregarProducto);
+
+btnVaciarListado.addEventListener("click", borrarListado);
 
 inputBuscar.addEventListener("keyup", (event) => {
   // Limpia el temporizador anterior
