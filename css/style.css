@@ -192,7 +192,7 @@ body {
   padding: 11px 18px;
   border: none;
   border-radius: 7px;
-  background-color: #dc2626;
+  background-color: #afaeae;
   color: white;
   font-size: 1rem;
   font-weight: bold;
@@ -212,6 +212,67 @@ body {
   max-width: 600px;
   margin: 30px auto 0;
   text-align: center;
+}
+
+#modal-bienvenida {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(15, 23, 42, 0.55);
+  z-index: 1000;
+  opacity: 1;
+  visibility: hidden;
+  transition:
+    opacity 0.7s ease,
+    visibility 0.7s ease;
+}
+
+#modal-bienvenida.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#contenido-modal {
+  width: 90%;
+  max-width: 460px;
+  padding: 30px;
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border-radius: 16px;
+  text-align: center;
+  box-shadow:
+    0 15px 35px rgba(15, 23, 42, 0.2),
+    0 5px 10px rgba(15, 23, 42, 0.08);
+  border-top: 4px solid #2563eb;
+  opacity: 0;
+  transform: translateY(20px) scale(0.97);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+#modal-bienvenida.visible #contenido-modal {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+#contenido-modal h2 {
+  color: #0f172a;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+#contenido-modal p {
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+#contenido-modal p:last-child {
+  margin-bottom: 0;
+  color: #2563eb;
+  font-weight: bold;
 }
 
 #notificacion {
