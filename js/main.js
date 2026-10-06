@@ -57,33 +57,44 @@ const productosIniciales = [
   ),
 ];
 
-// Obtener productos almacenados en localStorage
-const productosAlmacenados = localStorage.getItem("listadoProductos") ?? null;
-
 let listadoProductos;
 
-// Si existen productos en localStorage
-if (productosAlmacenados) {
-  // Convertir JSON a objeto JS
-  const productosJSON = JSON.parse(productosAlmacenados);
+try {
+  // Obtener productos almacenados en localStorage
+  const productosAlmacenados = localStorage.getItem("listadoProductos") ?? null;
 
-  // Reconstruir las instancias de Producto
-  listadoProductos = productosJSON.map(
-    (producto) =>
-      new Producto(
-        producto.id,
-        producto.nombre,
-        producto.stock,
-        producto.precio,
-        producto.descripcion,
-      ),
-  );
-} else {
-  // Si no existe localStorage, utilizar los productos iniciales
+  // Si existen productos en localStorage
+  if (productosAlmacenados) {
+    // Convertir JSON a objeto JS
+    const productosJSON = JSON.parse(productosAlmacenados);
+
+    // Reconstruir las instancias de Producto
+    listadoProductos = productosJSON.map(
+      (producto) =>
+        new Producto(
+          producto.id,
+          producto.nombre,
+          producto.stock,
+          producto.precio,
+          producto.descripcion,
+        ),
+    );
+  } else {
+    // Si no existe localStorage, utilizar los productos iniciales
+    listadoProductos = [...productosIniciales];
+
+    // Guardar productos iniciales en localStorage
+    localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
+  }
+} catch (error) {
+  console.error(`Error al cargar los productos: ${error.message}`);
+
+  // Recuperamos los productos iniciales
   listadoProductos = [...productosIniciales];
 
-  // Guardar productos iniciales en localStorage
-  localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
+  mostrarNotificaciones("No fue posible cargar los productos almacenados");
+} finally {
+  console.log("Proceso de carga de productos finalizado.");
 }
 
 // Muestra en pantalla las acciones realizadas
@@ -151,17 +162,24 @@ function eliminarProducto(event) {
   }
 
   const productoEliminado = listadoProductos[indiceProducto];
-  listadoProductos.splice(indiceProducto, 1);
 
-  // Actualizar localStorage
-  localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
+  try {
+    listadoProductos.splice(indiceProducto, 1);
 
-  mostrarProductos();
+    // Actualizar localStorage
+    localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
 
-  productoEliminado &&
-    mostrarNotificaciones(
-      `Se ha eliminado el producto "${productoEliminado.nombre}" del listado.`,
-    );
+    productoEliminado &&
+      mostrarNotificaciones(
+        `Se ha eliminado el producto "${productoEliminado.nombre}" del listado.`,
+      );
+  } catch (error) {
+    console.error(`Error al eliminar el producto: ${error.message}`);
+
+    mostrarNotificaciones("No se pudo eliminar el producto.");
+  } finally {
+    mostrarProductos();
+  }
 }
 
 // Agrega un producto al listado
@@ -209,19 +227,25 @@ function agregarProducto(event) {
   // Agregar al listado
   listadoProductos.push(nuevoProducto);
 
-  // Actualizar localStorage
-  localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
+  try {
+    // Actualizar localStorage
+    localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
 
-  // Actualizar interfaz
-  mostrarProductos();
+    // Mostrar notificación
+    mostrarNotificaciones(
+      `El producto "${nuevoProducto.nombre}" se ha agregado al listado exitosamente.`,
+    );
+  } catch (error) {
+    console.error(`Error al guardar el producto: ${error.message}`);
 
-  // Mostrar notificación
-  mostrarNotificaciones(
-    `El producto "${nuevoProducto.nombre}" se ha agregado al listado exitosamente.`,
-  );
+    mostrarNotificaciones("Ocurrió un error al guardar el producto.");
+  } finally {
+    // Limpiar formulario
+    formularioAgregacion.reset();
 
-  // Limpiar formulario
-  formularioAgregacion.reset();
+    // Actualizar interfaz
+    mostrarProductos();
+  }
 }
 
 // Vacía por completo el listado
