@@ -23,6 +23,16 @@ const contenedorProductos = document.getElementById("contenedor-items");
 const btnAgregar = document.getElementById("btn-agregar");
 const btnVaciarListado = document.getElementById("btn-vaciar-listado");
 const notificaciones = document.getElementById("notificacion");
+const modalBienvenida = document.getElementById("modal-bienvenida");
+
+// Muestra ventana de bienvenida
+setTimeout(() => {
+  modalBienvenida.classList.add("visible");
+
+  setTimeout(() => {
+    modalBienvenida.classList.remove("visible");
+  }, 3000);
+}, 100);
 
 const inputNombre = document.querySelector("#nombre");
 const inputPrecio = document.querySelector("#precio");
