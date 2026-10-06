@@ -6,7 +6,7 @@ El proyecto cuenta con una interfaz web que permite **agregar, buscar, mostrar y
 
 También se implementa una clase **Producto** para representar cada producto con información como identificador, nombre, stock, precio y descripción, así como un método para verificar su disponibilidad.
 
-El proyecto incorpora persistencia de datos mediante **`localStorage`**, permitiendo conservar el listado de productos aunque se recargue o cierre la página.
+El proyecto incorpora persistencia de datos mediante **`localStorage`**, permitiendo conservar la información del inventario incluso después de recargar o cerrar la página.
 
 ## 📌 Funcionalidades
 
@@ -20,16 +20,17 @@ El proyecto incorpora persistencia de datos mediante **`localStorage`**, permiti
 - Actualizar dinámicamente la interfaz mediante manipulación del DOM.
 - Guardar los productos en **`localStorage`**.
 - Recuperar los productos almacenados al cargar la aplicación.
+- Manejar errores mediante **`try/catch/finally`** en operaciones que pueden generar excepciones.
 
 ## 🛠️ Tecnologías
 
-- HTML5
-- CSS3
-- JavaScript
-- Manipulación del DOM.
-- Eventos del navegador.
-- LocalStorage
-- JSON
+- **HTML5**
+- **CSS3**
+- **JavaScript**
+- **Manipulación del DOM**
+- **Eventos del navegador**
+- **LocalStorage**
+- **JSON**
 
 ## 📂 Conceptos utilizados
 
@@ -54,6 +55,7 @@ El simulador utiliza diferentes conceptos fundamentales de JavaScript:
 - Uso de **`setTimeout()`** y **`clearTimeout()`**.
 - Persistencia de datos con **`localStorage`**.
 - Serialización y deserialización mediante JSON.
+- Manejo de excepciones con **`try/catch/finally`**.
 
 ### Métodos de arreglos utilizados
 
@@ -92,6 +94,10 @@ El simulador utiliza diferentes métodos de arreglos para trabajar con la inform
 El proyecto incorpora **`localStorage`** para conservar la información del inventario en el navegador.
 
 De esta manera, los productos agregados o eliminados permanecen disponibles después de recargar la página.
+
+### Manejo de errores
+
+El simulador incorpora **`try/catch/finally`** para manejar posibles errores durante operaciones como la lectura y conversión de información almacenada en **`localStorage`**.
 
 ## 🖥️ Interfaz
 
@@ -152,6 +158,15 @@ Las notificaciones se muestran durante unos segundos y luego desaparecen automá
 
 Para ejecutar el proyecto, abre el archivo **index.html** en un navegador web.
 
+La estructura principal del proyecto está compuesta por:
+
+```text
+📁 proyecto
+├── 📄 index.html
+├── 📄 style.css
+└── 📄 main.js
+```
+
 El archivo HTML carga los estilos desde **style.css** y el código JavaScript desde **main.js**.
 
 La interacción con el simulador se realiza directamente desde la interfaz gráfica mediante formularios, botones y elementos dinámicos.
@@ -162,4 +177,4 @@ Los datos del inventario se almacenan localmente en el navegador mediante **`loc
 
 El objetivo de este proyecto es practicar conceptos fundamentales de **JavaScript** mediante la creación de un pequeño sistema de gestión de productos.
 
-A través del proyecto se ponen en práctica conceptos como **arreglos, clases, objetos, funciones, métodos de orden superior, validaciones, eventos y manipulación del DOM y almacenamiento local**, aplicados a un caso práctico de inventario y control de stock.
+A través del proyecto se ponen en práctica conceptos como **arreglos, clases, objetos, funciones, métodos de orden superior, validaciones, eventos y manipulación del DOM, manejo de errores y almacenamiento local**, aplicados a un caso práctico de inventario y control de stock.
