@@ -186,6 +186,27 @@ body {
   background-color: #b91c1c;
 }
 
+#btn-vaciar-listado {
+  display: block;
+  margin: 20px auto 30px;
+  padding: 11px 18px;
+  border: none;
+  border-radius: 7px;
+  background-color: #dc2626;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+}
+
+#btn-vaciar-listado:hover {
+  background-color: #b91c1c;
+  transform: translateY(-1px);
+}
+
 #contenedor-notificaciones {
   width: 90%;
   max-width: 600px;
@@ -225,9 +246,7 @@ body {
 @media (min-width: 768px) {
   #contenedor-items {
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
-
     gap: 20px;
   }
 
@@ -253,15 +272,12 @@ body {
 @media (max-width: 767px) {
   #formularios {
     grid-template-columns: 1fr;
-
     width: 90%;
-
     gap: 20px;
   }
 
   #titulo {
     font-size: 1.6rem;
-
     padding: 28px 15px;
   }
 
