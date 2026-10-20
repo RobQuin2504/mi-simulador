@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "nombre": "Laptop",
+    "cantidad": 10,
+    "precio": 15000,
+    "descripcion": "Laptop para trabajo y estudio"
+  },
+  {
+    "id": 2,
+    "nombre": "Mouse inalámbrico",
+    "cantidad": 0,
+    "precio": 450,
+    "descripcion": "Mouse inalámbrico ergonómico"
+  },
+  {
+    "id": 3,
+    "nombre": "Teclado mecánico",
+    "cantidad": 15,
+    "precio": 1200,
+    "descripcion": "Teclado mecánico RGB"
+  },
+  {
+    "id": 4,
+    "nombre": "Monitor",
+    "cantidad": 8,
+    "precio": 3500,
+    "descripcion": "Monitor Full HD de 24 pulgadas"
+  },
+  {
+    "id": 5,
+    "nombre": "Audífonos",
+    "cantidad": 20,
+    "precio": 800,
+    "descripcion": "Audífonos inalámbricos con cancelación de ruido"
+  }
+]
