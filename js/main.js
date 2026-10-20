@@ -87,42 +87,63 @@ async function obtenerProductos() {
   }
 }
 
-try {
-  // Obtener productos almacenados en localStorage
-  const productosAlmacenados = localStorage.getItem("listadoProductos") ?? null;
+// Inicialización asíncrona
+async function inicializarProductos() {
+  // Mostrar el mensaje antes de iniciar la petición
+  contenedorProductos.innerHTML = `
+    <p class="sin-productos">
+      Cargando...
+    </p>
+  `;
 
-  // Si existen productos en localStorage
-  if (productosAlmacenados) {
-    // Convertir JSON a objeto JS
-    const productosJSON = JSON.parse(productosAlmacenados);
+  try {
+    // Obtener productos almacenados en localStorage
+    const productosAlmacenados =
+      localStorage.getItem("listadoProductos") ?? null;
 
-    // Reconstruir las instancias de Producto
-    listadoProductos = productosJSON.map(
-      (producto) =>
-        new Producto(
-          producto.id,
-          producto.nombre,
-          producto.stock,
-          producto.precio,
-          producto.descripcion,
-        ),
-    );
-  } else {
-    // Si no existe localStorage, utilizar los productos iniciales
-    listadoProductos = [...productosIniciales];
+    // Si existen productos en localStorage
+    if (productosAlmacenados) {
+      // Convertir JSON a objeto JS
+      const productosJSON = JSON.parse(productosAlmacenados);
 
-    // Guardar productos iniciales en localStorage
-    localStorage.setItem("listadoProductos", JSON.stringify(listadoProductos));
+      // Reconstruir las instancias de Producto
+      listadoProductos = productosJSON.map(
+        (producto) =>
+          new Producto(
+            producto.id,
+            producto.nombre,
+            producto.stock,
+            producto.precio,
+            producto.descripcion,
+          ),
+      );
+    } else {
+      // Si no hay datos guardados, cargar el JSON local
+      listadoProductos = await obtenerProductos();
+
+      // Guardar productos iniciales en localStorage
+      localStorage.setItem(
+        "listadoProductos",
+        JSON.stringify(listadoProductos),
+      );
+    }
+
+    mostrarProductos();
+  } catch (error) {
+    console.error(`Error al cargar productos: ${error.message}`);
+
+    // Recuperamos los productos iniciales
+    listadoProductos = [];
+    mostrarProductos();
+
+    contenedorProductos.innerHTML = `
+      <p class="sin-productos">
+        No fue posible cargar los productos almacenados
+      </p>
+    `;
+  } finally {
+    console.log("Proceso de carga de productos finalizado.");
   }
-} catch (error) {
-  console.error(`Error al cargar los productos: ${error.message}`);
-
-  // Recuperamos los productos iniciales
-  listadoProductos = [...productosIniciales];
-
-  mostrarNotificaciones("No fue posible cargar los productos almacenados");
-} finally {
-  console.log("Proceso de carga de productos finalizado.");
 }
 
 // Muestra en pantalla las acciones realizadas
