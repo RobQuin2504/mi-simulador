@@ -360,4 +360,4 @@ contenedorProductos.addEventListener("click", (event) => {
 });
 
 // Inicializa simulador
-mostrarProductos();
+inicializarProductos();
