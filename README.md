@@ -8,9 +8,12 @@ También se implementa una clase **Producto** para representar cada producto con
 
 El proyecto incorpora persistencia de datos mediante **`localStorage`**, permitiendo conservar la información del inventario incluso después de recargar o cerrar la página.
 
+Además, se implementa la carga asíncrona de productos desde un archivo JSON local mediante **fetch()** y **async/await**, junto con mecanismos para manejar errores durante la carga y el almacenamiento de información.
+
 ## 📌 Funcionalidades
 
 - Mostrar un listado inicial de productos.
+- Cargar productos desde un archivo JSON local.
 - Agregar nuevos productos al listado.
 - Buscar productos por nombre.
 - Mostrar los productos encontrados.
@@ -27,10 +30,13 @@ El proyecto incorpora persistencia de datos mediante **`localStorage`**, permiti
 - **HTML5**
 - **CSS3**
 - **JavaScript**
+- **Toastify** para mostrar notificaciones
+- **Fetch API** para obtener información desde un archivo JSON
 - **Manipulación del DOM**
 - **Eventos del navegador**
 - **LocalStorage**
 - **JSON**
+- **Asincronía con async/await**
 
 ## 📂 Conceptos utilizados
 
@@ -53,6 +59,8 @@ El simulador utiliza diferentes conceptos fundamentales de JavaScript:
 - Validación de datos.
 - Template literals.
 - Uso de **`setTimeout()`** y **`clearTimeout()`**.
+- Peticiones asíncronas mediante **`fetch()`**.
+- Uso de **`async/await`**.
 - Persistencia de datos con **`localStorage`**.
 - Serialización y deserialización mediante JSON.
 - Manejo de excepciones con **`try/catch/finally`**.
@@ -88,6 +96,14 @@ El simulador utiliza diferentes métodos de arreglos para trabajar con la inform
 - `findIndex()` para obtener la posición de un producto.
 - `filter()` para realizar búsquedas por nombre.
 - `map()` para obtener los IDs existentes y generar un nuevo identificador.
+
+### Carga asíncrona de productos
+
+El proyecto utiliza la función obtenerProductos() para recuperar los productos iniciales desde un archivo JSON local mediante **fetch()**.
+
+La función se declara con async y utiliza await para esperar la respuesta de la petición y la conversión de los datos mediante response.json().
+
+La función inicializarProductos() se encarga de coordinar la carga inicial, mostrar un mensaje de carga y actualizar la interfaz cuando finaliza el proceso.
 
 ### Persistencia con localStorage
 
@@ -145,14 +161,14 @@ Al eliminar un producto, se actualiza nuevamente **`localStorage`** y se vuelve 
 
 ### Notificaciones
 
-El proyecto utiliza un sistema de notificaciones para informar al usuario cuando:
+El proyecto utiliza **Toastify** para mostrar notificaciones visuales que informan al usuario sobre las operaciones realizadas.
 
-- Los datos ingresados no son válidos.
-- Se agrega un producto correctamente.
-- Se elimina un producto.
-- No se encuentra un producto durante una búsqueda.
+Se implementan diferentes tipos de notificaciones:
 
-Las notificaciones se muestran durante unos segundos y luego desaparecen automáticamente.
+- `success` → indica que una operación se completó correctamente.
+- `error` → informa sobre errores o datos no válidos.
+- `info` → permite mostrar mensajes informativos.
+- `warning` → define un estilo para advertencias.
 
 ## ▶️ Ejecución
 
@@ -161,13 +177,16 @@ Para ejecutar el proyecto, abre el archivo **index.html** en un navegador web.
 La estructura principal del proyecto está compuesta por:
 
 ```text
-📁 proyecto
+📁 mi-simulador
 ├── 📄 index.html
-├── 📄 style.css
-└── 📄 main.js
+├── 📁 css
+│   └── 📄 style.css
+├── 📁 js
+│   └── 📄 main.js
+└── 📄 productos.json
 ```
 
-El archivo HTML carga los estilos desde **style.css** y el código JavaScript desde **main.js**.
+El archivo HTML carga los estilos desde **css/style.css** y el código JavaScript desde **js/main.js**. El archivo productos.json contiene la información inicial de los productos.
 
 La interacción con el simulador se realiza directamente desde la interfaz gráfica mediante formularios, botones y elementos dinámicos.
 
@@ -177,4 +196,4 @@ Los datos del inventario se almacenan localmente en el navegador mediante **`loc
 
 El objetivo de este proyecto es practicar conceptos fundamentales de **JavaScript** mediante la creación de un pequeño sistema de gestión de productos.
 
-A través del proyecto se ponen en práctica conceptos como **arreglos, clases, objetos, funciones, métodos de orden superior, validaciones, eventos y manipulación del DOM, manejo de errores y almacenamiento local**, aplicados a un caso práctico de inventario y control de stock.
+A través del proyecto se ponen en práctica conceptos como **arreglos, clases, objetos, funciones, métodos de orden superior, validaciones, eventos y manipulación del DOM, programación asíncrona, consumo de archivos JSON, manejo de errores y almacenamiento local**, aplicados a un caso práctico de inventario y control de stock.
