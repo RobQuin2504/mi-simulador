@@ -147,13 +147,34 @@ async function inicializarProductos() {
 }
 
 // Muestra en pantalla las acciones realizadas
-function mostrarNotificaciones(mensaje) {
-  notificaciones.textContent = mensaje;
+function mostrarNotificaciones(mensaje, tipo = "info") {
+  const estilos = {
+    success: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+    },
+    error: {
+      background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+    },
+    info: {
+      background: "linear-gradient(to right, #2193b0, #6dd5ed)",
+    },
+    warning: {
+      background: "linear-gradient(to right, #f7971e, #ffd200)",
+    },
+  };
 
-  // Mostrar notificación por 3 segundos
-  setTimeout(() => {
-    notificaciones.textContent = "";
-  }, 3000);
+  Toastify({
+    text: mensaje,
+    duration: 3000,
+    close: true,
+    gravity: "top",
+    position: "right",
+    stopOnFocus: true,
+    style: {
+      ...(estilos[tipo] || estilos.info),
+      borderRadius: "12px",
+    },
+  }).showToast();
 }
 
 // Muestra en pantalla los productos del listado
@@ -221,11 +242,12 @@ function eliminarProducto(event) {
     productoEliminado &&
       mostrarNotificaciones(
         `Se ha eliminado el producto "${productoEliminado.nombre}" del listado.`,
+        "success",
       );
   } catch (error) {
     console.error(`Error al eliminar el producto: ${error.message}`);
 
-    mostrarNotificaciones("No se pudo eliminar el producto.");
+    mostrarNotificaciones("No se pudo eliminar el producto.", "error");
   } finally {
     mostrarProductos();
   }
@@ -242,19 +264,19 @@ function agregarProducto(event) {
 
   // Validación del nombre
   if (nombre === "") {
-    mostrarNotificaciones("El nombre del producto no es válido.");
+    mostrarNotificaciones("El nombre del producto no es válido.", "error");
     return;
   }
 
   // Validación del precio
   if (inputPrecio.value === "" || precio <= 0) {
-    mostrarNotificaciones("El precio ingresado no es válido.");
+    mostrarNotificaciones("El precio ingresado no es válido.", "error");
     return;
   }
 
   // Validación del stock
   if (inputStock.value === "" || stock < 1 || stock > 20) {
-    mostrarNotificaciones("El stock ingresado no es válido.");
+    mostrarNotificaciones("El stock ingresado no es válido.", "error");
     return;
   }
 
@@ -283,11 +305,12 @@ function agregarProducto(event) {
     // Mostrar notificación
     mostrarNotificaciones(
       `El producto "${nuevoProducto.nombre}" se ha agregado al listado exitosamente.`,
+      "success",
     );
   } catch (error) {
     console.error(`Error al guardar el producto: ${error.message}`);
 
-    mostrarNotificaciones("Ocurrió un error al guardar el producto.");
+    mostrarNotificaciones("Ocurrió un error al guardar el producto.", "error");
   } finally {
     // Limpiar formulario
     formularioAgregacion.reset();
@@ -301,7 +324,7 @@ function agregarProducto(event) {
 function borrarListado() {
   // Comprobar si ya no hay productos
   if (listadoProductos.length === 0) {
-    mostrarNotificaciones("El listado ya ha sido vaciado.");
+    mostrarNotificaciones("El listado ya ha sido vaciado.", "error");
     return;
   }
 
@@ -311,9 +334,9 @@ function borrarListado() {
     localStorage.removeItem("listadoProductos");
     mostrarProductos();
 
-    mostrarNotificaciones("Se ha vaciado el listado.");
+    mostrarNotificaciones("Se ha vaciado el listado.", "success");
   } catch (error) {
-    mostrarNotificaciones("No fue posible vaciar el listado.");
+    mostrarNotificaciones("No fue posible vaciar el listado.", "error");
   }
 }
 
