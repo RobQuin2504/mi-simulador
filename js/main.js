@@ -299,9 +299,22 @@ function agregarProducto(event) {
 
 // Vacía por completo el listado
 function borrarListado() {
-  listadoProductos = [];
-  localStorage.removeItem("listadoProductos");
-  mostrarProductos();
+  // Comprobar si ya no hay productos
+  if (listadoProductos.length === 0) {
+    mostrarNotificaciones("El listado ya ha sido vaciado.");
+    return;
+  }
+
+  try {
+    listadoProductos = [];
+
+    localStorage.removeItem("listadoProductos");
+    mostrarProductos();
+
+    mostrarNotificaciones("Se ha vaciado el listado.");
+  } catch (error) {
+    mostrarNotificaciones("No fue posible vaciar el listado.");
+  }
 }
 
 function buscarProducto(textoInput) {
