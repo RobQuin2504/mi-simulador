@@ -25,6 +25,16 @@ const btnVaciarListado = document.getElementById("btn-vaciar-listado");
 const notificaciones = document.getElementById("notificacion");
 const modalBienvenida = document.getElementById("modal-bienvenida");
 
+const inputNombre = document.querySelector("#nombre");
+const inputPrecio = document.querySelector("#precio");
+const inputStock = document.querySelector("#stock");
+const inputDescripcion = document.querySelector("#descripcion");
+const inputBuscar = document.querySelector("#buscar");
+
+// Estado de la aplicación
+let temporizador;
+let listadoProductos = [];
+
 // Muestra ventana de bienvenida
 setTimeout(() => {
   modalBienvenida.classList.add("visible");
@@ -34,30 +44,48 @@ setTimeout(() => {
   }, 3000);
 }, 100);
 
-const inputNombre = document.querySelector("#nombre");
-const inputPrecio = document.querySelector("#precio");
-const inputStock = document.querySelector("#stock");
-const inputDescripcion = document.querySelector("#descripcion");
-const inputBuscar = document.querySelector("#buscar");
-
-let temporizador;
-
 // Instanciación
-const productosIniciales = [
-  new Producto(1, "Laptop", 10, 15000, "Laptop para trabajo y estudio"),
-  new Producto(2, "Mouse inalámbrico", 0, 450, "Mouse inalámbrico ergonómico"),
-  new Producto(3, "Teclado mecánico", 15, 1200, "Teclado mecánico RGB"),
-  new Producto(4, "Monitor", 8, 3500, "Monitor Full HD de 24 pulgadas"),
-  new Producto(
-    5,
-    "Audífonos",
-    20,
-    800,
-    "Audífonos inalámbricos con cancelación de ruido",
-  ),
-];
+// const productosIniciales = [
+//   new Producto(1, "Laptop", 10, 15000, "Laptop para trabajo y estudio"),
+//   new Producto(2, "Mouse inalámbrico", 0, 450, "Mouse inalámbrico ergonómico"),
+//   new Producto(3, "Teclado mecánico", 15, 1200, "Teclado mecánico RGB"),
+//   new Producto(4, "Monitor", 8, 3500, "Monitor Full HD de 24 pulgadas"),
+//   new Producto(
+//     5,
+//     "Audífonos",
+//     20,
+//     800,
+//     "Audífonos inalámbricos con cancelación de ruido",
+//   ),
+// ];
 
-let listadoProductos;
+// Obtener productos desde el JSON local
+async function obtenerProductos() {
+  try {
+    const response = await fetch("../productos.json");
+
+    // Verifica si la respuesta fue exitosa
+    if (!response.ok) {
+      // Si el estado no es 200-299, lanza un error manual
+      throw new Error(`Error en la petición: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    return data.map((producto) => {
+      return new Producto(
+        Number(producto.id),
+        producto.nombre,
+        Number(producto.stock),
+        Number(producto.precio),
+        producto.descripcion ?? "Sin descripción",
+      );
+    });
+  } catch (error) {
+    // Captura errores de red o errores lanzados manualmente arriba
+    console.error(`No fue posible cargar los productos: ${error}`);
+  }
+}
 
 try {
   // Obtener productos almacenados en localStorage
