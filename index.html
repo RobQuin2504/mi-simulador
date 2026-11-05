@@ -44,8 +44,6 @@
   <main>
     <!-- Vista admin -->
     <section id="vista-admin">
-      <h2>Panel de administración</h2>
-
       <div id="formularios">
         <!-- Formulario para agregar productos -->
         <form id="form-agregacion">
@@ -68,22 +66,21 @@
           </label>
 
           <label for="imagen">Imagen:
-            <input type="text" name="imagen" id="imagen" placeholder="img/producto.jpg" required>
+            <input type="text" name="imagen" id="imagen" placeholder="img/producto.jpg">
           </label>
 
-          <button type="button" id="btn-agregar">Agregar +</button>
+          <button type="submit" id="btn-agregar">Agregar +</button>
         </form>
-      </div>
 
-      <!-- Buscador -->
-      <div id="contenedor-busqueda">
-        <h3>Buscar un producto</h3>
-        <input type="search" name="buscar" id="buscar" placeholder="Nombre del producto">
+        <!-- Buscador -->
+        <div id="contenedor-busqueda">
+          <h3>Buscar un producto</h3>
+          <input type="search" name="buscar" id="buscar" placeholder="Nombre del producto">
+        </div>
       </div>
 
       <!-- Listado de productos -->
       <div id="contenedor-items">
-        <h3>Listado de productos</h3>
         <div id="listado-productos"></div>
       </div>
 
@@ -94,25 +91,23 @@
 
     <!-- Vista cliente -->
     <section id="vista-cliente" hidden>
-      <h2>Catálogo de productos</h2>
-      <p>
-        Explora nuestros productos y agrega los que quieras
-        comprar a tu carrito.
-      </p>
+      <div id="contenedor-catalogo">
+        <h2>Catálogo de productos</h2>
 
-      <!-- Buscador -->
-      <div id="contenedor-busqueda-cliente">
-        <label for="buscar-cliente">
-          Buscar un producto
-        </label>
-        <input type="search" id="buscar-cliente" placeholder="Nombre del producto">
+        <!-- Buscador -->
+        <div id="contenedor-busqueda-cliente">
+          <label for="buscar-cliente">
+            Buscar un producto
+          </label>
+          <input type="search" id="buscar-cliente" placeholder="Buscar productos...">
+        </div>
+
+        <!-- Listado de productos disponibles -->
+        <div id="catalogo-productos"></div>
       </div>
 
-      <!-- Listado de productos disponibles -->
-      <div id="catalogo-productos"></div>
-
       <!-- Carrito -->
-      <section id="seccion-carrito">
+      <div id="contenedor-carrito">
         <h2>Mi carrito</h2>
 
         <div id="carrito"></div>
@@ -137,7 +132,7 @@
             Confirmar compra
           </button>
         </div>
-      </section>
+      </div>
     </section>
   </main>
 </body>
