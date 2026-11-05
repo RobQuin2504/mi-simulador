@@ -51,11 +51,11 @@
           </label>
 
           <label for="precio">Precio:
-            <input type="number" name="precio" id="precio">
+            <input type="number" name="precio" id="precio" min="0.01" step="0.01">
           </label>
 
           <label for="stock">Stock:
-            <input type="number" name="stock" id="stock" min="1" max="20">
+            <input type="number" name="stock" id="stock" min="1" max="20" step="1">
           </label>
 
           <label for="descripcion">Descripción:
@@ -64,12 +64,12 @@
 
           <button type="button" id="btn-agregar">Agregar +</button>
         </form>
+      </div>
 
-        <!-- Buscador -->
-        <div id="contenedor-busqueda">
-          <h3>Buscar un producto</h3>
-          <input type="search" name="buscar" id="buscar" placeholder="Nombre del producto">
-        </div>
+      <!-- Buscador -->
+      <div id="contenedor-busqueda">
+        <h3>Buscar un producto</h3>
+        <input type="search" name="buscar" id="buscar" placeholder="Nombre del producto">
       </div>
 
       <!-- Listado de productos -->
