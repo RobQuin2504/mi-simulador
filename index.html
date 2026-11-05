@@ -36,43 +36,53 @@
     </nav>
   </header>
 
-  <div id="formularios">
-    <form action="" id="form-agregacion">
-      <h2>Agregar un producto</h2>
+  <main>
+    <!-- Vista admin -->
+    <section id="vista-admin">
+      <h2>Panel de administración</h2>
 
-      <label for="nombre">Nombre:
-        <input type="text" name="nombre" id="nombre">
-      </label>
+      <div id="formularios">
+        <!-- Formulario para agregar productos -->
+        <form id="form-agregacion">
+          <h3>Agregar un producto</h3>
 
-      <label for="precio">Precio:
-        <input type="number" name="precio" id="precio">
-      </label>
+          <label for="nombre">Nombre:
+            <input type="text" name="nombre" id="nombre">
+          </label>
 
-      <label for="stock">Stock:
-        <input type="number" name="stock" id="stock" min="1" max="20">
-      </label>
+          <label for="precio">Precio:
+            <input type="number" name="precio" id="precio">
+          </label>
 
-      <label for="descripcion">Descripción:
-        <input type="text" name="descripcion" id="descripcion">
-      </label>
+          <label for="stock">Stock:
+            <input type="number" name="stock" id="stock" min="1" max="20">
+          </label>
 
-      <button type="button" id="btn-agregar">Agregar +</button>
-    </form>
+          <label for="descripcion">Descripción:
+            <input type="text" name="descripcion" id="descripcion">
+          </label>
 
-    <div id="contenedor-busqueda">
-      <h2>Buscar un producto</h2>
+          <button type="button" id="btn-agregar">Agregar +</button>
+        </form>
 
-      <input type="text" name="buscar" id="buscar" placeholder="Nombre del producto">
-    </div>
-  </div>
+        <!-- Buscador -->
+        <div id="contenedor-busqueda">
+          <h3>Buscar un producto</h3>
+          <input type="search" name="buscar" id="buscar" placeholder="Nombre del producto">
+        </div>
+      </div>
 
-  <div id="contenedor-items">
-    <h2>Listado de productos</h2>
-  </div>
+      <!-- Listado de productos -->
+      <div id="contenedor-items">
+        <h3>Listado de productos</h3>
+        <div id="listado-productos"></div>
+      </div>
 
-  <div>
-    <button id="btn-vaciar-listado">Vaciar listado</button>
-  </div>
+      <button type="button" id="btn-vaciar-listado">
+        Vaciar listado
+      </button>
+    </section>
+  </main>
 
   <div id="modal-bienvenida">
     <div id="contenido-modal">
