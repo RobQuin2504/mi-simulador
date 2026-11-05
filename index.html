@@ -82,6 +82,54 @@
         Vaciar listado
       </button>
     </section>
+
+    <!-- Vista cliente -->
+    <section id="vista-cliente" hidden>
+      <h2>Catálogo de productos</h2>
+      <p>
+        Explora nuestros productos y agrega los que quieras
+        comprar a tu carrito.
+      </p>
+
+      <!-- Buscador -->
+      <div id="contenedor-busqueda-cliente">
+        <label for="buscar-cliente">
+          Buscar un producto
+        </label>
+        <input type="search" id="buscar-cliente" placeholder="Nombre del producto">
+      </div>
+
+      <!-- Listado de productos disponibles -->
+      <div id="catalogo-productos"></div>
+
+      <!-- Carrito -->
+      <section id="seccion-carrito">
+        <h2>Mi carrito</h2>
+
+        <div id="carrito"></div>
+
+        <div id="resumen-carrito">
+          <p>
+            Total de productos:
+            <span id="cantidad-total">0</span>
+          </p>
+
+          <h3>
+            Total a pagar: <span id="total">$0.00</span>
+          </h3>
+        </div>
+
+        <div id="acciones-carrito">
+          <button type="button" id="btn-vaciar-carrito">
+            Vaciar carrito
+          </button>
+
+          <button type="button" id="btn-confirmar">
+            Confirmar compra
+          </button>
+        </div>
+      </section>
+    </section>
   </main>
 
   <div id="modal-bienvenida">
