@@ -100,17 +100,11 @@ function mostrarCatalogo(productos = App.getProductos()) {
     cardProducto.className = "card-producto";
 
     cardProducto.innerHTML = `
-      ${
-        imagen
-          ? `
-            <img
-              src="assets/${imagen}"
-              alt="${nombre}"
-              class="imagen-producto"
-            >
-            `
-          : ""
-      }
+      <img
+        src="${imagen.startsWith("data:image/") ? imagen : `assets/${imagen}`}"
+        alt="${nombre}"
+        class="imagen-producto"
+      >
       <h3>${nombre}</h3>
       <p>Precio: $${precio.toFixed(2)}</p>
       <p>${descripcion}</p>

@@ -13,6 +13,18 @@ const inputBuscar = document.querySelector("#buscar");
 // Estado de la aplicación
 let temporizador;
 
+// Convertir imagen a Base64
+function convertirImagenBase64(archivo) {
+  return new Promise((resolve, reject) => {
+    const lector = new FileReader();
+
+    lector.onload = () => resolve(lector.result);
+    lector.onerror = () => reject(lector.error);
+
+    lector.readAsDataURL(archivo);
+  });
+}
+
 // Muestra en pantalla los productos del listado
 function mostrarProductos(productos = App.getProductos()) {
   contenedorProductos.innerHTML = "";
@@ -35,17 +47,11 @@ function mostrarProductos(productos = App.getProductos()) {
 
     cardProducto.innerHTML = `
       <h6>#${id}</h6>
-      ${
-        imagen
-          ? `
-            <img
-              src="assets/${imagen}"
-              alt="${nombre}"
-              class="imagen-producto"
-            >
-            `
-          : ""
-      }
+      <img
+        src="${imagen.startsWith("data:image/") ? imagen : `assets/${imagen}`}"
+        alt="${nombre}"
+        class="imagen-producto"
+      >
       <h3>${nombre}</h3>
       <p>Precio: $${precio.toFixed(2)}</p>
       <p>${descripcion}</p>
@@ -71,17 +77,17 @@ function mostrarProductos(productos = App.getProductos()) {
 }
 
 // Agregar producto
-function agregarProductoAdmin(event) {
+async function agregarProductoAdmin(event) {
   event.preventDefault();
 
   const nombre = inputNombre.value.trim();
   const precio = Number(inputPrecio.value);
   const stock = Number(inputStock.value);
   const descripcion = inputDescripcion.value.trim();
-  const imagen = inputImagen.value.trim();
+  const archivoImagen = inputImagen.files[0];
 
   // Valida campos vaciós
-  if (!nombre || !descripcion || !imagen) {
+  if (!nombre || !descripcion || !archivoImagen) {
     App.mostrarNotificacion("Completa todos los campos.", "warning");
     return;
   }
@@ -101,27 +107,41 @@ function agregarProductoAdmin(event) {
     return;
   }
 
-  // Crea nuevo producto
-  const nuevoProducto = App.agregarProducto({
-    nombre,
-    precio,
-    stock,
-    descripcion,
-    imagen,
-  });
-
-  if (!nuevoProducto) {
-    App.mostrarNotificacion("No fue posible guardar el producto.", "error");
+  // Validar que sea una imagen
+  if (!archivoImagen.type.startsWith("image/")) {
+    App.mostrarNotificacion("Selecciona un archivo de imagen válido.", "error");
     return;
   }
 
-  formularioAgregacion.reset();
-  mostrarProductos();
+  try {
+    // Convertir imagen
+    const imagen = await convertirImagenBase64(archivoImagen);
 
-  App.mostrarNotificacion(
-    `El producto "${nuevoProducto.nombre}" se ha agregado correctamente.`,
-    "success",
-  );
+    // Crea nuevo producto
+    const nuevoProducto = App.agregarProducto({
+      nombre,
+      precio,
+      stock,
+      descripcion,
+      imagen,
+    });
+
+    if (!nuevoProducto) {
+      App.mostrarNotificacion("No fue posible guardar el producto.", "error");
+      return;
+    }
+
+    formularioAgregacion.reset();
+    mostrarProductos();
+
+    App.mostrarNotificacion(
+      `El producto "${nuevoProducto.nombre}" se ha agregado correctamente.`,
+      "success",
+    );
+  } catch (error) {
+    console.error(`Error al cargar la imagen: ${error}`);
+    App.mostrarNotificacion("No fue posible cargar la imagen.", "error");
+  }
 }
 
 // Eliminar producto
@@ -178,10 +198,43 @@ async function editarProductoAdmin(id) {
             value="${producto.descripcion}"
           >
 
-          <input id="swal-imagen" class="swal2-input"
-            placeholder="Ruta de imagen"
-            value="${producto.imagen}"
-          >
+          <div style="margin: 15px 0;">
+            <label for="swal-imagen">
+              Imagen del producto
+            </label>
+
+            ${
+              producto.imagen
+                ? `
+                  <img
+                    src="${
+                      producto.imagen.startsWith("data:image/")
+                        ? producto.imagen
+                        : `assets/${producto.imagen}`
+                    }"
+                    alt="Imagen actual"
+                    style="
+                      display:block;
+                      max-width:150px;
+                      max-height:120px;
+                      object-fit:contain;
+                      margin:10px auto;
+                    "
+                  >
+                `
+                : "<p>Sin imagen disponible</p>"
+            }
+
+            <input
+              id="swal-imagen"
+              type="file"
+              accept="image/*"
+            >
+
+            <small>
+              Selecciona una nueva imagen o conserva la actual.
+            </small>
+          </div>
         `,
     showCancelButton: true,
     confirmButtonText: "Guardar cambios",
@@ -194,9 +247,9 @@ async function editarProductoAdmin(id) {
       const precio = Number(popup.querySelector("#swal-precio").value);
       const stock = Number(popup.querySelector("#swal-stock").value);
       const descripcion = popup.querySelector("#swal-descripcion").value.trim();
-      const imagen = popup.querySelector("#swal-imagen").value.trim();
+      const archivoImagen = popup.querySelector("#swal-imagen").files[0];
 
-      if (!nombre || !descripcion || !imagen) {
+      if (!nombre || !descripcion) {
         Swal.showValidationMessage("Completa todos los campos.");
         return false;
       }
@@ -211,18 +264,48 @@ async function editarProductoAdmin(id) {
         return false;
       }
 
-      return { nombre, precio, stock, descripcion, imagen };
+      if (archivoImagen && !archivoImagen.type.startsWith("image/")) {
+        Swal.showValidationMessage("Selecciona un archivo de imagen válido.");
+        return false;
+      }
+
+      return { nombre, precio, stock, descripcion, archivoImagen };
     },
   });
 
   if (!resultado.isConfirmed) return;
 
-  if (App.actualizarProducto(id, resultado.value)) {
-    mostrarProductos();
+  try {
+    const datos = resultado.value;
 
-    App.mostrarNotificacion("Producto actualizado correctamente.", "success");
-  } else {
-    App.mostrarNotificacion("No fue posible actualizar el producto.", "error");
+    // Conservar imagen anterior si no se selecciona otra
+    let imagen = producto.imagen;
+
+    // Convertir nueva imagen si fue seleccionada
+    if (datos.archivoImagen) {
+      imagen = await convertirImagenBase64(datos.archivoImagen);
+    }
+
+    const productoActualizado = {
+      nombre: datos.nombre,
+      precio: datos.precio,
+      stock: datos.stock,
+      descripcion: datos.descripcion,
+      imagen,
+    };
+
+    if (App.actualizarProducto(id, productoActualizado)) {
+      mostrarProductos();
+      App.mostrarNotificacion("Producto actualizado correctamente.", "success");
+    } else {
+      App.mostrarNotificacion(
+        "No fue posible actualizar el producto.",
+        "error",
+      );
+    }
+  } catch (error) {
+    console.error(`Error al actualizar el producto: ${error}`);
+    App.mostrarNotificacion("No fue posible procesar la imagen.", "error");
   }
 }
 // Vaciar inventario
