@@ -374,7 +374,7 @@ async function confirmarCompra() {
 
   // Guardar cambios en inventario
   if (!App.guardarProductos(productosActualizados)) {
-    App.mostrarNotificacion(`No fue posible procesar la compra: ${error}`);
+    App.mostrarNotificacion("No fue posible procesar la compra", "error");
     return;
   }
 
