@@ -248,6 +248,11 @@ function cambiarVista(vista) {
 
   vistaAdmin.hidden = vista !== "admin";
   vistaCliente.hidden = vista !== "cliente";
+
+  // Actualizar catálogo al entrar a la vista cliente
+  if (vista === "cliente") {
+    window.dispatchEvent(new CustomEvent("inventarioActualizado"));
+  }
 }
 
 // Inicialización
