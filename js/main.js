@@ -59,7 +59,7 @@ function guardarProductos(productos) {
 // Obtener productos desde el JSON local
 async function obtenerProductos() {
   try {
-    const response = await fetch("../productos.json");
+    const response = await fetch("./productos.json");
 
     // Verifica si la respuesta fue exitosa
     if (!response.ok) {
