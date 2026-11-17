@@ -24,8 +24,31 @@ let listadoProductos = [];
 // Función para guardar productos
 function guardarProductos(productos) {
   try {
-    localStorage.setItem("listadoProductos", JSON.stringify(productos));
-    listadoProductos = productos;
+    // Reconstruir instancias de Producto
+    const productosActualizados = productos.map(
+      (producto) =>
+        new Producto(
+          Number(producto.id),
+          producto.nombre,
+          Number(producto.stock),
+          Number(producto.precio),
+          producto.descripcion ?? "Sin descripción",
+          producto.imagen ?? "",
+        ),
+    );
+
+    // Guardar en localStorage
+    localStorage.setItem(
+      "listadoProductos",
+      JSON.stringify(productosActualizados),
+    );
+
+    // Actualizar estado de la aplicación
+    listadoProductos = productosActualizados;
+
+    // Notificar que el inventario cambió
+    window.dispatchEvent(new CustomEvent("inventarioActualizado"));
+
     return true;
   } catch (error) {
     console.error(`Error al guardar productos: ${error}`);
