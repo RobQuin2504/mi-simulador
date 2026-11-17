@@ -458,6 +458,13 @@ btnVaciarCarrito.addEventListener("click", vaciarCarrito);
 // Confirmar compra
 btnConfirmar.addEventListener("click", confirmarCompra);
 
+// Escuchar cambios en el inventario
+window.addEventListener("inventarioActualizado", () => {
+  sincronizarCarrito();
+  mostrarCatalogo();
+  mostrarCarrito();
+});
+
 // Inicialización
 App.productosListos.then(() => {
   sincronizarCarrito();
